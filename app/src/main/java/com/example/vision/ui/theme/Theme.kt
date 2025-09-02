@@ -1,6 +1,5 @@
 package com.example.vision.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -11,43 +10,201 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+// Calm & Serenity Theme - Soft blues
+private val CalmSerenityLightColors = lightColorScheme(
+    primary = SkyBlue,
+    secondary = PowderBlue,
+    tertiary = Periwinkle,
+    background = NeutralBackground,
+    surface = NeutralSurface,
+    onPrimary = SoftTextPrimary,
+    onSecondary = SoftTextPrimary,
+    onBackground = SoftTextPrimary,
+    onSurface = SoftTextPrimary,
+    onSurfaceVariant = SoftTextSecondary
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+private val CalmSerenityDarkColors = darkColorScheme(
+    primary = SkyBlueDark,
+    secondary = PowderBlueDark,
+    tertiary = PeriwinkleDark,
+    background = NeutralBackgroundDark,
+    surface = NeutralSurfaceDark,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimaryDark,
+    onBackground = SoftTextPrimaryDark,
+    onSurface = SoftTextPrimaryDark,
+    onSurfaceVariant = SoftTextSecondaryDark
+)
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+// Nature & Harmony Theme - Gentle greens
+private val NatureHarmonyLightColors = lightColorScheme(
+    primary = SageGreen,
+    secondary = MintGreen,
+    tertiary = OliveGreen,
+    background = NeutralBackground,
+    surface = NeutralSurface,
+    onPrimary = SoftTextPrimary,
+    onSecondary = SoftTextPrimary,
+    onBackground = SoftTextPrimary,
+    onSurface = SoftTextPrimary,
+    onSurfaceVariant = SoftTextSecondary
+)
+
+private val NatureHarmonyDarkColors = darkColorScheme(
+    primary = SageGreenDark,
+    secondary = MintGreenDark,
+    tertiary = OliveGreenDark,
+    background = NeutralBackgroundDark,
+    surface = NeutralSurfaceDark,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimaryDark,
+    onBackground = SoftTextPrimaryDark,
+    onSurface = SoftTextPrimaryDark,
+    onSurfaceVariant = SoftTextSecondaryDark
+)
+
+// Warm Comfort Theme - Warm neutrals
+private val WarmComfortLightColors = lightColorScheme(
+    primary = Taupe,
+    secondary = Beige,
+    tertiary = Cream,
+    background = Cream,
+    surface = Beige,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimary,
+    onBackground = SoftTextPrimary,
+    onSurface = SoftTextPrimary,
+    onSurfaceVariant = SoftTextSecondary
+)
+
+private val WarmComfortDarkColors = darkColorScheme(
+    primary = TaupeDark,
+    secondary = BeigeDark,
+    tertiary = CreamDark,
+    background = NeutralBackgroundDark,
+    surface = NeutralSurfaceDark,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimaryDark,
+    onBackground = SoftTextPrimaryDark,
+    onSurface = SoftTextPrimaryDark,
+    onSurfaceVariant = SoftTextSecondaryDark
+)
+
+// Cool Neutral Theme - Balance and sophistication
+private val CoolNeutralLightColors = lightColorScheme(
+    primary = Stone,
+    secondary = LightGray,
+    tertiary = SoftGray,
+    background = NeutralBackground,
+    surface = NeutralSurface,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimary,
+    onBackground = SoftTextPrimary,
+    onSurface = SoftTextPrimary,
+    onSurfaceVariant = SoftTextSecondary
+)
+
+private val CoolNeutralDarkColors = darkColorScheme(
+    primary = StoneDark,
+    secondary = LightGrayDark,
+    tertiary = SoftGrayDark,
+    background = NeutralBackgroundDark,
+    surface = NeutralSurfaceDark,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimaryDark,
+    onBackground = SoftTextPrimaryDark,
+    onSurface = SoftTextPrimaryDark,
+    onSurfaceVariant = SoftTextSecondaryDark
+)
+
+// Light Sensitive Theme - Rose/pink tints for reduced glare
+private val LightSensitiveLightColors = lightColorScheme(
+    primary = SoftPink,
+    secondary = RoseTint,
+    tertiary = LightGray,
+    background = RoseTint,
+    surface = NeutralSurface,
+    onPrimary = SoftTextPrimary,
+    onSecondary = SoftTextPrimary,
+    onBackground = SoftTextPrimary,
+    onSurface = SoftTextPrimary,
+    onSurfaceVariant = SoftTextSecondary
+)
+
+private val LightSensitiveDarkColors = darkColorScheme(
+    primary = SoftPinkDark,
+    secondary = RoseTintDark,
+    tertiary = LightGrayDark,
+    background = NeutralBackgroundDark,
+    surface = NeutralSurfaceDark,
+    onPrimary = SoftTextPrimaryDark,
+    onSecondary = SoftTextPrimaryDark,
+    onBackground = SoftTextPrimaryDark,
+    onSurface = SoftTextPrimaryDark,
+    onSurfaceVariant = SoftTextSecondaryDark
 )
 
 @Composable
 fun VisionTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    themeType: ThemeType = ThemeType.CALM_SERENITY,
+    dynamicColor: Boolean = false, // Disabled by default for eye-friendly themes
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (darkTheme) {
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
+            }
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        else -> {
+            when (themeType) {
+                ThemeType.CALM_SERENITY -> {
+                    if (darkTheme) {
+                        CalmSerenityDarkColors
+                    } else {
+                        CalmSerenityLightColors
+                    }
+                }
+
+                ThemeType.NATURE_HARMONY -> {
+                    if (darkTheme) {
+                        NatureHarmonyDarkColors
+                    } else {
+                        NatureHarmonyLightColors
+                    }
+                }
+
+                ThemeType.WARM_COMFORT -> {
+                    if (darkTheme) {
+                        WarmComfortDarkColors
+                    } else {
+                        WarmComfortLightColors
+                    }
+                }
+
+                ThemeType.COOL_NEUTRAL -> {
+                    if (darkTheme) {
+                        CoolNeutralDarkColors
+                    } else {
+                        CoolNeutralLightColors
+                    }
+                }
+
+                ThemeType.LIGHT_SENSITIVE -> {
+                    if (darkTheme) {
+                        LightSensitiveDarkColors
+                    } else {
+                        LightSensitiveLightColors
+                    }
+                }
+            }
+        }
     }
 
     MaterialTheme(

@@ -4,15 +4,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -30,25 +33,26 @@ import com.example.vision.presentation.viewmodel.ProfileViewModel
 @Composable
 fun ProfileScreen(
     onNavigateBack: () -> Unit,
+    onNavigateToSettings: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val profile = state.profile
-    
+
     var firstName by remember(profile) { mutableStateOf(profile?.firstName ?: "") }
     var lastName by remember(profile) { mutableStateOf(profile?.lastName ?: "") }
     var bio by remember(profile) { mutableStateOf(profile?.bio ?: "") }
     var phoneNumber by remember(profile) { mutableStateOf(profile?.phoneNumber ?: "") }
     var city by remember(profile) { mutableStateOf(profile?.location?.city ?: "") }
     var country by remember(profile) { mutableStateOf(profile?.location?.country ?: "") }
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Profile") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {
@@ -93,14 +97,14 @@ fun ProfileScreen(
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
-                    
+
                     if (!state.isEditing) {
                         Text(
                             text = profile.displayName,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold
                         )
-                        
+
                         if (!profile.bio.isNullOrEmpty()) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
@@ -115,7 +119,7 @@ fun ProfileScreen(
                                 )
                             }
                         }
-                        
+
                         Card(
                             modifier = Modifier.fillMaxWidth()
                         ) {
@@ -128,7 +132,7 @@ fun ProfileScreen(
                                     label = "Name",
                                     value = "${profile.firstName} ${profile.lastName}"
                                 )
-                                
+
                                 if (!profile.phoneNumber.isNullOrEmpty()) {
                                     ProfileInfoRow(
                                         icon = Icons.Default.Phone,
@@ -136,13 +140,13 @@ fun ProfileScreen(
                                         value = profile.phoneNumber
                                     )
                                 }
-                                
+
                                 if (profile.location != null) {
                                     val locationText = listOfNotNull(
                                         profile.location.city,
                                         profile.location.country
                                     ).joinToString(", ")
-                                    
+
                                     if (locationText.isNotEmpty()) {
                                         ProfileInfoRow(
                                             icon = Icons.Default.LocationOn,
@@ -151,14 +155,62 @@ fun ProfileScreen(
                                         )
                                     }
                                 }
-                                
+
                                 if (profile.gender != null) {
                                     ProfileInfoRow(
                                         icon = Icons.Default.Person,
                                         label = "Gender",
-                                        value = profile.gender.name.replace("_", " ")
+                                        value = profile.gender.name.lowercase().replaceFirstChar { it.uppercase() }.replace("_", " ")
                                     )
                                 }
+                            }
+                        }
+                        
+                        // Settings Button
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onNavigateToSettings() },
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Default.Settings,
+                                        contentDescription = "Settings",
+                                        tint = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Column {
+                                        Text(
+                                            text = "Settings",
+                                            fontSize = 16.sp,
+                                            fontWeight = FontWeight.Medium,
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                                        )
+                                        Text(
+                                            text = "Appearance and preferences",
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                                        )
+                                    }
+                                }
+                                Icon(
+                                    Icons.Default.ChevronRight,
+                                    contentDescription = "Go to Settings",
+                                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                                    modifier = Modifier.size(20.dp)
+                                )
                             }
                         }
                     } else {
@@ -169,7 +221,7 @@ fun ProfileScreen(
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = lastName,
                             onValueChange = { lastName = it },
@@ -177,7 +229,7 @@ fun ProfileScreen(
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = bio,
                             onValueChange = { bio = it },
@@ -186,7 +238,7 @@ fun ProfileScreen(
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = phoneNumber,
                             onValueChange = { phoneNumber = it },
@@ -197,7 +249,7 @@ fun ProfileScreen(
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = city,
                             onValueChange = { city = it },
@@ -205,7 +257,7 @@ fun ProfileScreen(
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = country,
                             onValueChange = { country = it },
@@ -213,7 +265,7 @@ fun ProfileScreen(
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -224,7 +276,7 @@ fun ProfileScreen(
                             ) {
                                 Text("Cancel")
                             }
-                            
+
                             Button(
                                 onClick = {
                                     val updatedProfile = profile.copy(
@@ -253,7 +305,7 @@ fun ProfileScreen(
                     }
                 }
             }
-            
+
             if (state.error != null) {
                 Snackbar(
                     modifier = Modifier.align(Alignment.BottomCenter),

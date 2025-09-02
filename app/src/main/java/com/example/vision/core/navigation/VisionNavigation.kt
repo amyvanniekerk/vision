@@ -85,6 +85,32 @@ fun VisionNavigation(
             ProfileScreen(
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToSettings = {
+                    navController.navigate(NavigationRoute.SETTINGS) {
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+        
+        composable(NavigationRoute.SETTINGS) {
+            SettingsScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onNavigateToAppearance = {
+                    navController.navigate(NavigationRoute.APPEARANCE) {
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+        
+        composable(NavigationRoute.APPEARANCE) {
+            AppearanceScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
                 }
             )
         }

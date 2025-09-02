@@ -12,6 +12,7 @@ object NavigationRoute {
     const val HOME = "home"
     const val PROFILE = "profile"
     const val SETTINGS = "settings"
+    const val APPEARANCE = "appearance"
     const val SPLASH = "splash"
     const val JOURNEY = "journey"
     const val COLOR_MATCH = "color_match"
