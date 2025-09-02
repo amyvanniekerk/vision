@@ -1,25 +1,56 @@
 package com.example.vision.presentation.screens.customer.careGuide
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ContactSupport
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Air
+import androidx.compose.material.icons.filled.CleaningServices
+import androidx.compose.material.icons.filled.HealthAndSafety
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Inventory
+import androidx.compose.material.icons.filled.LocalHospital
+import androidx.compose.material.icons.filled.Opacity
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Pool
+import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Soap
+import androidx.compose.material.icons.filled.Texture
+import androidx.compose.material.icons.filled.Thermostat
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.WaterDrop
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import com.example.vision.R
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.vision.presentation.screens.customer.careGuide.components.CareStep
+import com.example.vision.presentation.screens.customer.careGuide.components.ExpandableCareStepsCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -133,26 +164,25 @@ fun CareGuideScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
-                            Icons.Default.HealthAndSafety,
+                           Icons.Default.HealthAndSafety,
                             contentDescription = "Care Guide",
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = "Daily Care Routine",
+                            text = "Eye Care Routine",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = "Follow these steps daily to maintain your prosthetic eye",
+                            text = "Follow these steps to maintain your prosthetic eye",
                             fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
             }
-
 
             // Daily Cleaning Steps - Expandable
             item {
@@ -215,28 +245,32 @@ fun CareGuideScreen(
                             )
                         }
 
-                        AvoidanceItem(
+                        InfoItem(
                             title = "Harsh chemicals:",
                             description = "Never use detergents, alcohol, household cleaners, toothpaste, or bleaches.",
-                            icon = Icons.Default.Science
+                            icon = Icons.Default.Science,
+                            tintColor = MaterialTheme.colorScheme.error
                         )
 
-                        AvoidanceItem(
+                        InfoItem(
                             title = "Hot water:",
                             description = "Extreme temperature fluctuations can damage the material.",
-                            icon = Icons.Default.Thermostat
+                            icon = Icons.Default.Thermostat,
+                            tintColor = MaterialTheme.colorScheme.error
                         )
 
-                        AvoidanceItem(
+                        InfoItem(
                             title = "Abrasive materials:",
                             description = "Avoid using rough cloths or brushes, as they can wear away the polished surface.",
-                            icon = Icons.Default.Texture
+                            icon = Icons.Default.Texture,
+                            tintColor = MaterialTheme.colorScheme.error
                         )
 
-                        AvoidanceItem(
+                        InfoItem(
                             title = "Soaking in water:",
                             description = "Do not store the prosthesis in water for extended periods when it's not in use.",
-                            icon = Icons.Default.Pool
+                            icon = Icons.Default.Pool,
+                            tintColor = MaterialTheme.colorScheme.error
                         )
                     }
                 }
@@ -281,22 +315,25 @@ fun CareGuideScreen(
                             )
                         }
 
-                        ImportantNoteItem(
+                        InfoItem(
                             title = "Regular professional care:",
                             description = "Schedule annual or bi-annual visits with your ocularist for professional polishing and maintenance.",
-                            icon = Icons.Default.Schedule
+                            icon = Icons.Default.Schedule,
+                            tintColor = MaterialTheme.colorScheme.secondary
                         )
 
-                        ImportantNoteItem(
+                        InfoItem(
                             title = "Lubricating drops:",
                             description = "Your ocularist may recommend lubricating eye drops for comfort.",
-                            icon = Icons.Default.Opacity
+                            icon = Icons.Default.Opacity,
+                            tintColor = MaterialTheme.colorScheme.secondary
                         )
 
-                        ImportantNoteItem(
+                        InfoItem(
                             title = "Consult your ocularist:",
                             description = "Always check with your ocularist about recommended cleaning solutions and any specific products that may affect the material of your prosthesis.",
-                            icon = Icons.AutoMirrored.Filled.ContactSupport
+                            icon = Icons.AutoMirrored.Filled.ContactSupport,
+                            tintColor = MaterialTheme.colorScheme.secondary
                         )
                     }
                 }
@@ -343,194 +380,11 @@ fun CareGuideScreen(
 }
 
 @Composable
-private fun ExpandableCareStepsCard(
-    title: String,
-    subtitle: String,
-    steps: List<CareStep>,
-    isExpanded: Boolean,
-    onToggleExpanded: () -> Unit
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Column {
-            // Header - Always visible
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onToggleExpanded() }
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = title,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Surface(
-                            shape = CircleShape,
-                            color = MaterialTheme.colorScheme.primary
-                        ) {
-                            Text(
-                                text = steps.size.toString(),
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = colorResource(id = R.color.white)
-                            )
-                        }
-                    }
-                    Text(
-                        text = subtitle,
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
-                }
-
-                Icon(
-                    if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                    contentDescription = if (isExpanded) "Collapse" else "Expand",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            // First step preview when collapsed
-            if (!isExpanded) {
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "1",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = colorResource(id = R.color.white)
-                        )
-                    }
-
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = steps.first().title,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Text(
-                            text = "Tap to see all ${steps.size} steps",
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-
-            // All steps when expanded
-            if (isExpanded) {
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f))
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    steps.forEachIndexed { index, step ->
-                        CareStepItem(
-                            stepNumber = index + 1,
-                            step = step
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CareStepItem(
-    stepNumber: Int,
-    step: CareStep
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.Top
-        ) {
-            // Step Number Circle
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primary),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stepNumber.toString(),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.white)
-                )
-            }
-
-            // Step Content
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        step.icon,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        text = step.title,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-
-                Text(
-                    text = step.description,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    lineHeight = 20.sp
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun AvoidanceItem(
+private fun InfoItem(
     title: String,
     description: String,
-    icon: ImageVector
+    icon: ImageVector,
+    tintColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.primary
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -541,7 +395,7 @@ private fun AvoidanceItem(
             icon,
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.error
+            tint = tintColor
         )
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -550,7 +404,7 @@ private fun AvoidanceItem(
                 text = title,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.error
+                color = tintColor
             )
             Text(
                 text = description,
@@ -561,45 +415,3 @@ private fun AvoidanceItem(
         }
     }
 }
-
-@Composable
-private fun ImportantNoteItem(
-    title: String,
-    description: String,
-    icon: ImageVector
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.Top
-    ) {
-        Icon(
-            icon,
-            contentDescription = null,
-            modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.secondary
-        )
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                text = title,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.secondary
-            )
-            Text(
-                text = description,
-                fontSize = 13.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = 18.sp
-            )
-        }
-    }
-}
-
-private data class CareStep(
-    val title: String,
-    val description: String,
-    val icon: ImageVector
-)

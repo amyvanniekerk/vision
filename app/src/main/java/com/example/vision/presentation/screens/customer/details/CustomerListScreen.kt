@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.User
+import com.example.vision.presentation.screens.customer.details.components.EmptySearchResult
 import com.example.vision.ui.components.VisionTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,21 +30,21 @@ fun CustomerListScreen(
     onCustomerClick: (User) -> Unit,
     onAddCustomer: () -> Unit = {},
     onNavigateBack: () -> Unit,
-    ) {
+) {
     var searchQuery by remember { mutableStateOf("") }
-    
+
     val filteredCustomers = remember(customers, searchQuery) {
         if (searchQuery.isBlank()) {
             customers
         } else {
             customers.filter { customer ->
                 customer.profile.displayName.contains(searchQuery, ignoreCase = true) ||
-                customer.email.contains(searchQuery, ignoreCase = true) ||
-                customer.id.contains(searchQuery, ignoreCase = true)
+                        customer.email.contains(searchQuery, ignoreCase = true) ||
+                        customer.id.contains(searchQuery, ignoreCase = true)
             }
         }
     }
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -97,7 +98,7 @@ fun CustomerListScreen(
                         .padding(8.dp)
                 )
             }
-            
+
             // Customer Count
             Text(
                 text = "${filteredCustomers.size} customer(s)",
@@ -105,7 +106,7 @@ fun CustomerListScreen(
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            
+
             // Customer List
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -118,7 +119,7 @@ fun CustomerListScreen(
                         onClick = { onCustomerClick(customer) }
                     )
                 }
-                
+
                 if (filteredCustomers.isEmpty() && searchQuery.isNotBlank()) {
                     item {
                         EmptySearchResult()
@@ -156,13 +157,13 @@ private fun CustomerListItem(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    Icons.Default.Person,
+                    imageVector = Icons.Default.Person,
                     contentDescription = "Profile Picture",
                     modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            
+
             // Customer Info
             Column(
                 modifier = Modifier.weight(1f),
@@ -184,7 +185,7 @@ private fun CustomerListItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
-            
+
             // Eye Data Indicator
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -192,20 +193,22 @@ private fun CustomerListItem(
             ) {
                 Surface(
                     shape = CircleShape,
-                    color = if (customer.profile.eyeData.isNotEmpty()) 
+                    color = if (customer.profile.eyeData.isNotEmpty()) {
                         MaterialTheme.colorScheme.secondary
-                    else 
+                    } else {
                         MaterialTheme.colorScheme.surfaceVariant
+                    }
                 ) {
                     Text(
                         text = customer.profile.eyeData.size.toString(),
                         modifier = Modifier.padding(8.dp),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (customer.profile.eyeData.isNotEmpty())
+                        color = if (customer.profile.eyeData.isNotEmpty()) {
                             MaterialTheme.colorScheme.onSecondary
-                        else
+                        } else {
                             MaterialTheme.colorScheme.onSurfaceVariant
+                        }
                     )
                 }
                 Text(
@@ -214,7 +217,7 @@ private fun CustomerListItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            
+
             // Status & Navigation
             Column(
                 horizontalAlignment = Alignment.End,
@@ -222,59 +225,34 @@ private fun CustomerListItem(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = if (customer.isActive) 
+                    color = if (customer.isActive)
                         MaterialTheme.colorScheme.secondaryContainer
-                    else 
+                    else
                         MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
                 ) {
                     Text(
-                        text = if (customer.isActive) "Active" else "Inactive",
+                        text = if (customer.isActive) {
+                            "Active"
+                        } else {
+                            "Inactive"
+                        },
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Medium,
-                        color = if (customer.isActive) 
+                        color = if (customer.isActive)
                             MaterialTheme.colorScheme.onSecondaryContainer
-                        else 
+                        else
                             MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
-                
+
                 Icon(
-                    Icons.Default.ChevronRight,
+                    imageVector = Icons.Default.ChevronRight,
                     contentDescription = "View Details",
                     modifier = Modifier.size(20.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun EmptySearchResult() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Icon(
-            Icons.Default.SearchOff,
-            contentDescription = "No Results",
-            modifier = Modifier.size(48.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
-        )
-        Text(
-            text = "No customers found",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Text(
-            text = "Try adjusting your search terms",
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-        )
     }
 }
