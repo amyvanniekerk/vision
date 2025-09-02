@@ -36,12 +36,12 @@ fun EmployeeManagementScreen(
                 title = { Text("Employee Management") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     IconButton(onClick = onCreateEmployee) {
-                        Icon(Icons.Default.PersonAdd, contentDescription = "Add Employee")
+                        Icon(Icons.Default.PersonAdd, contentDescription = null)
                     }
                 }
             )
@@ -53,7 +53,7 @@ fun EmployeeManagementScreen(
             ) {
                 Icon(
                     Icons.Default.Add,
-                    contentDescription = "Add Employee",
+                    contentDescription = null,
                     tint = Color.White
                 )
             }
@@ -186,7 +186,7 @@ private fun EmployeeListItem(
             ) {
                 Icon(
                     Icons.Default.WorkspacePremium,
-                    contentDescription = "Employee",
+                    contentDescription = null,
                     modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
@@ -246,7 +246,7 @@ private fun EmployeeListItem(
                 
                 Icon(
                     Icons.Default.Edit,
-                    contentDescription = "Edit Employee",
+                    contentDescription = null,
                     modifier = Modifier.size(20.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                 )
@@ -268,7 +268,7 @@ private fun EmptyEmployeeList(
     ) {
         Icon(
             Icons.Default.Groups,
-            contentDescription = "No Employees",
+            contentDescription = null,
             modifier = Modifier.size(64.dp),
             tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
         )

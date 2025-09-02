@@ -51,13 +51,13 @@ fun ProfileScreen(
                 title = { Text("Profile") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     if (!state.isEditing) {
                         IconButton(onClick = { viewModel.handleEvent(ProfileEvent.StartEditing) }) {
-                            Icon(Icons.Default.Edit, contentDescription = "Edit")
+                            Icon(Icons.Default.Edit, contentDescription = null)
                         }
                     }
                 }
@@ -91,7 +91,7 @@ fun ProfileScreen(
                     ) {
                         Icon(
                             Icons.Default.Person,
-                            contentDescription = "Profile Picture",
+                            contentDescription = null,
                             modifier = Modifier.size(60.dp),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -187,7 +187,7 @@ fun ProfileScreen(
                                 ) {
                                     Icon(
                                         Icons.Default.Settings,
-                                        contentDescription = "Settings",
+                                        contentDescription = null,
                                         tint = MaterialTheme.colorScheme.onSecondaryContainer
                                     )
                                     Column {
@@ -206,7 +206,7 @@ fun ProfileScreen(
                                 }
                                 Icon(
                                     Icons.Default.ChevronRight,
-                                    contentDescription = "Go to Settings",
+                                    contentDescription = null,
                                     tint = MaterialTheme.colorScheme.onSecondaryContainer,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -334,7 +334,7 @@ private fun ProfileInfoRow(
     ) {
         Icon(
             icon,
-            contentDescription = label,
+            contentDescription = null,
             tint = MaterialTheme.colorScheme.primary
         )
         Column(modifier = Modifier.weight(1f)) {

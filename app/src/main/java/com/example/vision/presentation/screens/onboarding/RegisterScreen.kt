@@ -152,8 +152,7 @@ fun RegisterScreen(
                         Icon(
                             imageVector = if (passwordVisible) Icons.Default.VisibilityOff
                             else Icons.Default.Visibility,
-                            contentDescription = if (passwordVisible) "Hide password"
-                            else "Show password"
+                            contentDescription = null
                         )
                     }
                 },
@@ -176,8 +175,7 @@ fun RegisterScreen(
                         Icon(
                             imageVector = if (confirmPasswordVisible) Icons.Default.VisibilityOff
                             else Icons.Default.Visibility,
-                            contentDescription = if (confirmPasswordVisible) "Hide password"
-                            else "Show password"
+                            contentDescription = null
                         )
                     }
                 },

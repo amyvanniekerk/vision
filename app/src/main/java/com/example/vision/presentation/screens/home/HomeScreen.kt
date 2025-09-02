@@ -67,12 +67,12 @@ fun HomeScreen(
                 },
                 actions = {
                     IconButton(onClick = onNavigateToProfile) {
-                        Icon(Icons.Default.AccountCircle, contentDescription = "Profile")
+                        Icon(Icons.Default.AccountCircle, contentDescription = null)
                     }
                     IconButton(onClick = { 
                         authViewModel.handleEvent(AuthEvent.Logout) 
                     }) {
-                        Icon(Icons.Default.ExitToApp, contentDescription = "Logout")
+                        Icon(Icons.Default.ExitToApp, contentDescription = null)
                     }
                 }
             )

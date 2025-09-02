@@ -55,7 +55,7 @@ fun CustomerProfileHeader(
             ) {
                 Icon(
                     Icons.Default.Person,
-                    contentDescription = "Profile Picture",
+                    contentDescription = null,
                     modifier = Modifier.size(40.dp),
                     tint = Color.White
                 )

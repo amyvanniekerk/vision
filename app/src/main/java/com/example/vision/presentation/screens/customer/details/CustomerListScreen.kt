@@ -51,12 +51,12 @@ fun CustomerListScreen(
                 title = { Text("Customers") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     IconButton(onClick = onAddCustomer) {
-                        Icon(Icons.Default.PersonAdd, contentDescription = "Add Customer")
+                        Icon(Icons.Default.PersonAdd, contentDescription = null)
                     }
                 }
             )
@@ -68,7 +68,7 @@ fun CustomerListScreen(
             ) {
                 Icon(
                     Icons.Default.Add,
-                    contentDescription = "Add Customer",
+                    contentDescription = null,
                     tint = Color.White
                 )
             }
@@ -158,7 +158,7 @@ private fun CustomerListItem(
             ) {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    contentDescription = "Profile Picture",
+                    contentDescription = null,
                     modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -248,7 +248,7 @@ private fun CustomerListItem(
 
                 Icon(
                     imageVector = Icons.Default.ChevronRight,
-                    contentDescription = "View Details",
+                    contentDescription = null,
                     modifier = Modifier.size(20.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                 )

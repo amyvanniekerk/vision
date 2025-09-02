@@ -38,12 +38,12 @@ fun CustomerDetailsScreen(
                 title = { Text("Customer Details") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
                 actions = {
                     IconButton(onClick = onEditCustomer) {
-                        Icon(Icons.Default.Edit, contentDescription = "Edit Customer")
+                        Icon(Icons.Default.Edit, contentDescription = null)
                     }
                 }
             )

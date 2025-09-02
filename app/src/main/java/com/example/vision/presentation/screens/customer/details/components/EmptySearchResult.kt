@@ -28,7 +28,7 @@ fun EmptySearchResult() {
     ) {
         Icon(
             Icons.Default.SearchOff,
-            contentDescription = "No Results",
+            contentDescription = null,
             modifier = Modifier.size(48.dp),
             tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
         )

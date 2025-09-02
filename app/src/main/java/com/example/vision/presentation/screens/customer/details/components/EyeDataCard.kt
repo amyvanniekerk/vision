@@ -49,7 +49,7 @@ fun EyeDataCard(
                 ) {
                     Icon(
                         Icons.Default.RemoveRedEye,
-                        contentDescription = "Eye",
+                        contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Text(
@@ -64,7 +64,7 @@ fun EyeDataCard(
                 IconButton(onClick = onAddPhoto) {
                     Icon(
                         Icons.Default.AddAPhoto,
-                        contentDescription = "Add Photo",
+                        contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }

@@ -137,7 +137,7 @@ fun CareGuideScreen(
                 title = { Text("Care Guide") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 }
             )
@@ -165,7 +165,7 @@ fun CareGuideScreen(
                     ) {
                         Icon(
                            Icons.Default.HealthAndSafety,
-                            contentDescription = "Care Guide",
+                            contentDescription = null,
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -233,7 +233,7 @@ fun CareGuideScreen(
                         ) {
                             Icon(
                                 Icons.Default.Warning,
-                                contentDescription = "Warning",
+                                contentDescription = null,
                                 tint = MaterialTheme.colorScheme.error,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -303,7 +303,7 @@ fun CareGuideScreen(
                         ) {
                             Icon(
                                 Icons.Default.Info,
-                                contentDescription = "Important",
+                                contentDescription = null,
                                 tint = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -357,7 +357,7 @@ fun CareGuideScreen(
                         ) {
                             Icon(
                                 Icons.Default.Phone,
-                                contentDescription = "Contact",
+                                contentDescription = null,
                                 tint = MaterialTheme.colorScheme.secondary
                             )
                             Text(

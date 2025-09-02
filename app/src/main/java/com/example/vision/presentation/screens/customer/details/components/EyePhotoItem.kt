@@ -41,7 +41,7 @@ fun EyePhotoItem(photo: EyePhoto) {
             ) {
                 Icon(
                     Icons.Default.Visibility,
-                    contentDescription = "Eye Photo",
+                    contentDescription = null,
                     modifier = Modifier.size(32.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )

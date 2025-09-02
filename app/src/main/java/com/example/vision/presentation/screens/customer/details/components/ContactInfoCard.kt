@@ -45,7 +45,7 @@ fun ContactInfoCard(customer: User) {
             ) {
                 Icon(
                     Icons.Default.ContactPhone,
-                    contentDescription = "Contact",
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
@@ -103,7 +103,7 @@ fun MedicalHistoryCard(customer: User) {
             ) {
                 Icon(
                     Icons.Default.MedicalServices,
-                    contentDescription = "Medical History",
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(

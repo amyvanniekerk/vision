@@ -58,12 +58,12 @@ fun AdminHomeScreen(
                 },
                 actions = {
                     IconButton(onClick = onNavigateToProfile) {
-                        Icon(Icons.Default.AccountCircle, contentDescription = "Profile")
+                        Icon(Icons.Default.AccountCircle, contentDescription = null)
                     }
                     IconButton(onClick = { 
                         authViewModel.handleEvent(AuthEvent.Logout) 
                     }) {
-                        Icon(Icons.Default.PowerSettingsNew, contentDescription = "Logout")
+                        Icon(Icons.Default.PowerSettingsNew, contentDescription = null)
                     }
                 }
             )
@@ -329,7 +329,7 @@ private fun SystemOverviewCard(
             ) {
                 Icon(
                     Icons.Default.Dashboard,
-                    contentDescription = "System Overview",
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(

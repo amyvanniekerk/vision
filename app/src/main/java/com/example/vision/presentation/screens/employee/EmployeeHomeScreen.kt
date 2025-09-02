@@ -62,12 +62,12 @@ fun EmployeeHomeScreen(
                 },
                 actions = {
                     IconButton(onClick = onNavigateToProfile) {
-                        Icon(Icons.Default.AccountCircle, contentDescription = "Profile")
+                        Icon(Icons.Default.AccountCircle, contentDescription = null)
                     }
                     IconButton(onClick = { 
                         authViewModel.handleEvent(AuthEvent.Logout) 
                     }) {
-                        Icon(Icons.Default.PowerSettingsNew, contentDescription = "Logout")
+                        Icon(Icons.Default.PowerSettingsNew, contentDescription = null)
                     }
                 }
             )
@@ -314,7 +314,7 @@ private fun TodayScheduleCard() {
             ) {
                 Icon(
                     Icons.Default.Today,
-                    contentDescription = "Today's Schedule",
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
@@ -360,7 +360,7 @@ private fun RecentCustomerItem(
             ) {
                 Icon(
                     Icons.Default.Person,
-                    contentDescription = "Customer",
+                    contentDescription = null,
                     modifier = Modifier.size(20.dp),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
@@ -381,7 +381,7 @@ private fun RecentCustomerItem(
             
             Icon(
                 Icons.Default.ChevronRight,
-                contentDescription = "View",
+                contentDescription = null,
                 modifier = Modifier.size(16.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
             )
