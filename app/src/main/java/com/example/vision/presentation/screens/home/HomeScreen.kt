@@ -7,7 +7,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,8 +28,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.*
 import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthEffect
 import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import com.example.vision.presentation.screens.customer.journey.JourneyViewModel
+import kotlinx.coroutines.flow.collectLatest
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -38,6 +42,7 @@ fun HomeScreen(
     onNavigateToJourney: () -> Unit,
     onNavigateToColorMatch: () -> Unit,
     onNavigateToCareGuide: () -> Unit = {},
+    onNavigateToLogin: () -> Unit = {},
     authViewModel: AuthViewModel = hiltViewModel(),
     journeyViewModel: JourneyViewModel = hiltViewModel()
 ) {
@@ -47,6 +52,15 @@ fun HomeScreen(
     val dailyCare by journeyViewModel.dailyCareInstructions.collectAsStateWithLifecycle(emptyList())
     val journey by journeyViewModel.patientJourney.collectAsStateWithLifecycle()
     val replacementSchedule by journeyViewModel.replacementSchedule.collectAsStateWithLifecycle()
+    
+    LaunchedEffect(authViewModel) {
+        authViewModel.effect.collectLatest { effect ->
+            when (effect) {
+                is AuthEffect.NavigateToLogin -> onNavigateToLogin()
+                else -> {}
+            }
+        }
+    }
     
     Scaffold(
         topBar = {
@@ -72,7 +86,7 @@ fun HomeScreen(
                     IconButton(onClick = { 
                         authViewModel.handleEvent(AuthEvent.Logout) 
                     }) {
-                        Icon(Icons.Default.ExitToApp, contentDescription = null)
+                        Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null)
                     }
                 }
             )

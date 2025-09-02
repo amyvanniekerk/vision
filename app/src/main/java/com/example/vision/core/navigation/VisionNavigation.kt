@@ -40,7 +40,7 @@ fun VisionNavigation(
     val customerViewModel: CustomerViewModel = hiltViewModel()
     val authState by authViewModel.state.collectAsStateWithLifecycle()
     val customerState by customerViewModel.state.collectAsStateWithLifecycle()
-    
+
     NavHost(
         navController = navController,
         startDestination = NavigationRoute.SPLASH
@@ -61,7 +61,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.LOGIN) {
             LoginScreen(
                 onNavigateToRegister = {
@@ -77,7 +77,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.REGISTER) {
             RegisterScreen(
                 onNavigateToLogin = {
@@ -94,7 +94,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.HOME) {
             HomeScreen(
                 onNavigateToProfile = {
@@ -116,10 +116,18 @@ fun VisionNavigation(
                     navController.navigate(NavigationRoute.CARE_GUIDE) {
                         launchSingleTop = true
                     }
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavigationRoute.LOGIN) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 }
             )
         }
-        
+
         composable(NavigationRoute.EMPLOYEE_HOME) {
             EmployeeHomeScreen(
                 customers = customerState.customers,
@@ -140,7 +148,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.ADMIN_HOME) {
             AdminHomeScreen(
                 customers = customerState.customers.filter { it.role == UserRole.CUSTOMER },
@@ -162,7 +170,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.EMPLOYEE_MANAGEMENT) {
             EmployeeManagementScreen(
                 employees = customerState.customers.filter { it.role == UserRole.EMPLOYEE },
@@ -176,7 +184,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.CREATE_EMPLOYEE) {
             CreateEmployeeScreen(
                 onNavigateBack = {
@@ -188,7 +196,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.CUSTOMER_LIST) {
             CustomerListScreen(
                 customers = customerState.customers,
@@ -202,7 +210,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(
             route = NavigationRoute.CUSTOMER_DETAILS,
             arguments = listOf(
@@ -211,7 +219,7 @@ fun VisionNavigation(
         ) { backStackEntry ->
             val customerId = backStackEntry.arguments?.getString("customerId") ?: ""
             val customer = customerState.customers.find { it.id == customerId }
-            
+
             if (customer != null) {
                 CustomerDetailsScreen(
                     customer = customer,
@@ -226,7 +234,7 @@ fun VisionNavigation(
                 }
             }
         }
-        
+
         composable(NavigationRoute.PROFILE) {
             ProfileScreen(
                 onNavigateBack = {
@@ -239,7 +247,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.SETTINGS) {
             SettingsScreen(
                 onNavigateBack = {
@@ -252,7 +260,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.APPEARANCE) {
             AppearanceScreen(
                 onNavigateBack = {
@@ -260,7 +268,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.JOURNEY) {
             JourneyScreen(
                 onNavigateBack = {
@@ -268,7 +276,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.COLOR_MATCH) {
             ColorMatchScreen(
                 onNavigateBack = {
@@ -276,7 +284,7 @@ fun VisionNavigation(
                 }
             )
         }
-        
+
         composable(NavigationRoute.CARE_GUIDE) {
             CareGuideScreen(
                 onNavigateBack = {
