@@ -2,6 +2,7 @@ package com.example.vision.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -23,6 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.presentation.state.AuthEvent
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -89,71 +91,59 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                OutlinedTextField(
+                VisionTextField(
                     value = firstName,
                     onValueChange = { firstName = it },
-                    label = { Text("First Name") },
-                    leadingIcon = {
-                        Icon(Icons.Default.Person, contentDescription = "First Name")
-                    },
+                    label = "First Name",
+                    leadingIcon = Icons.Default.Person,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next
                     ),
-                    singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
                 
-                OutlinedTextField(
+                VisionTextField(
                     value = lastName,
                     onValueChange = { lastName = it },
-                    label = { Text("Last Name") },
+                    label = "Last Name",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next
                     ),
-                    singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
             }
             
-            OutlinedTextField(
+            VisionTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text("Username") },
-                leadingIcon = {
-                    Icon(Icons.Default.AccountCircle, contentDescription = "Username")
-                },
+                label = "Username",
+                leadingIcon = Icons.Default.AccountCircle,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
-                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             
-            OutlinedTextField(
+            VisionTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
-                leadingIcon = {
-                    Icon(Icons.Default.Email, contentDescription = "Email")
-                },
+                label = "Email",
+                leadingIcon = Icons.Default.Email,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
                 ),
-                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             
-            OutlinedTextField(
+            VisionTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
-                leadingIcon = {
-                    Icon(Icons.Default.Lock, contentDescription = "Password")
-                },
+                label = "Password",
+                leadingIcon = Icons.Default.Lock,
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
@@ -170,17 +160,14 @@ fun RegisterScreen(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Next
                 ),
-                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             
-            OutlinedTextField(
+            VisionTextField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
-                label = { Text("Confirm Password") },
-                leadingIcon = {
-                    Icon(Icons.Default.Lock, contentDescription = "Confirm Password")
-                },
+                label = "Confirm Password",
+                leadingIcon = Icons.Default.Lock,
                 trailingIcon = {
                     IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(
@@ -197,7 +184,6 @@ fun RegisterScreen(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
                 ),
-                singleLine = true,
                 isError = confirmPassword.isNotEmpty() && password != confirmPassword,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -216,7 +202,8 @@ fun RegisterScreen(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.errorContainer
-                    )
+                    ),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(
                         text = state.error ?: "",
@@ -246,7 +233,8 @@ fun RegisterScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                enabled = !state.isLoading && password == confirmPassword
+                enabled = !state.isLoading && password == confirmPassword,
+                shape = RoundedCornerShape(80.dp)
             ) {
                 if (state.isLoading) {
                     CircularProgressIndicator(

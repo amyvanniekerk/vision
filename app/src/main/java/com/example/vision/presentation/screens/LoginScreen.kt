@@ -1,6 +1,7 @@
 package com.example.vision.presentation.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -24,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.presentation.state.AuthEvent
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -80,28 +82,23 @@ fun LoginScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
-            OutlinedTextField(
+            VisionTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
-                leadingIcon = {
-                    Icon(Icons.Default.Email, contentDescription = "Email")
-                },
+                label = "Email",
+                leadingIcon = Icons.Default.Email,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
                 ),
-                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             
-            OutlinedTextField(
+            VisionTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
-                leadingIcon = {
-                    Icon(Icons.Default.Lock, contentDescription = "Password")
-                },
+                label = "Password",
+                leadingIcon = Icons.Default.Lock,
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
@@ -118,7 +115,6 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
                 ),
-                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             
@@ -127,7 +123,8 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.errorContainer
-                    )
+                    ),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(
                         text = state.error ?: "",
@@ -147,7 +144,8 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                enabled = !state.isLoading
+                enabled = !state.isLoading,
+                shape = RoundedCornerShape(80.dp)
             ) {
                 if (state.isLoading) {
                     CircularProgressIndicator(
