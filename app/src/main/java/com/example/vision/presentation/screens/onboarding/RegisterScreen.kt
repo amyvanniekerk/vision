@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens
+package com.example.vision.presentation.screens.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.presentation.state.AuthEvent
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.viewmodel.AuthViewModel
-import com.example.vision.presentation.components.StandardButton
+import com.example.vision.ui.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
 

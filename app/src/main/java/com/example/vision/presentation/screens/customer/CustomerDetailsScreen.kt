@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens
+package com.example.vision.presentation.screens.customer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,11 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.*
+import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -526,7 +529,7 @@ private fun MedicalHistoryCard(customer: User) {
                 InfoRow(
                     icon = Icons.Default.Cake,
                     label = "Date of Birth",
-                    value = java.text.SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault()).format(dob)
+                    value = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(dob)
                 )
             }
             
@@ -552,7 +555,7 @@ private fun MedicalHistoryCard(customer: User) {
 
 @Composable
 private fun InfoRow(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     label: String,
     value: String
 ) {

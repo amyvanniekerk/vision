@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens
+package com.example.vision.presentation.screens.employee
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.*
-import com.example.vision.presentation.components.StandardButton
+import com.example.vision.ui.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 
 @OptIn(ExperimentalMaterial3Api::class)

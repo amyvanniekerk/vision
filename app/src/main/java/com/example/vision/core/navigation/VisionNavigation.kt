@@ -10,12 +10,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
-import com.example.vision.presentation.screens.*
 import com.example.vision.presentation.state.NavigationRoute
 import com.example.vision.presentation.viewmodel.AuthViewModel
 import com.example.vision.presentation.viewmodel.CustomerViewModel
 import com.example.vision.presentation.viewmodel.CustomerEvent
 import com.example.vision.data.model.UserRole
+import com.example.vision.presentation.screens.customer.ColorMatchScreen
+import com.example.vision.presentation.screens.customer.CustomerDetailsScreen
+import com.example.vision.presentation.screens.customer.CustomerListScreen
+import com.example.vision.presentation.screens.customer.JourneyScreen
+import com.example.vision.presentation.screens.employee.CreateEmployeeScreen
+import com.example.vision.presentation.screens.employee.EmployeeHomeScreen
+import com.example.vision.presentation.screens.employee.EmployeeManagementScreen
+import com.example.vision.presentation.screens.home.AdminHomeScreen
+import com.example.vision.presentation.screens.home.HomeScreen
+import com.example.vision.presentation.screens.onboarding.LoginScreen
+import com.example.vision.presentation.screens.onboarding.RegisterScreen
+import com.example.vision.presentation.screens.profile.ProfileScreen
+import com.example.vision.presentation.screens.profile.settings.AppearanceScreen
+import com.example.vision.presentation.screens.profile.settings.SettingsScreen
 
 @Composable
 fun VisionNavigation(

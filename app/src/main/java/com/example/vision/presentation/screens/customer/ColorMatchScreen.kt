@@ -1,6 +1,5 @@
-package com.example.vision.presentation.screens
+package com.example.vision.presentation.screens.customer
 
-import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,13 +19,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.vision.data.model.ColorMatchResult
+import com.example.vision.data.model.EyeData
 import com.example.vision.data.model.PhotoType
 import com.example.vision.presentation.viewmodel.ColorMatchViewModel
 
@@ -121,7 +121,7 @@ fun ColorMatchScreen(
 }
 
 @Composable
-fun CurrentEyeDataCard(eyeData: com.example.vision.data.model.EyeData) {
+fun CurrentEyeDataCard(eyeData: EyeData) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -295,7 +295,7 @@ fun CameraCaptureCard(
 }
 
 @Composable
-fun AnalysisResultCard(result: com.example.vision.data.model.ColorMatchResult) {
+fun AnalysisResultCard(result: ColorMatchResult) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
