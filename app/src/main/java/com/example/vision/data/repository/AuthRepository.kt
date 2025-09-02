@@ -88,14 +88,15 @@ class AuthRepository @Inject constructor() {
     
     private fun createMockUser(email: String): User {
         return User(
-            id = UUID.randomUUID().toString(),
+            id = "admin_001",
             email = email,
-            username = "testuser",
+            username = "admin",
+            role = com.example.vision.data.model.UserRole.ADMIN,
             profile = UserProfile(
                 firstName = "Amy",
                 lastName = "Van Niekerk",
                 displayName = "Amy",
-                bio = "Software Developer",
+                bio = "System Administrator",
                 gender = Gender.FEMALE
             ),
             createdAt = Date(),

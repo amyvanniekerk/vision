@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.vision.core.navigation.VisionNavigation
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.state.NavigationRoute
+import com.example.vision.data.model.UserRole
 import com.example.vision.data.preferences.ThemePreferences
 import com.example.vision.presentation.viewmodel.AuthViewModel
 import com.example.vision.ui.theme.ThemeType
@@ -59,7 +60,13 @@ class MainActivity : ComponentActivity() {
                         authViewModel.effect.collectLatest { effect ->
                             when (effect) {
                                 is AuthEffect.NavigateToHome -> {
-                                    navController.navigate(NavigationRoute.HOME) {
+                                    val destination = when (authState.user?.role) {
+                                        UserRole.ADMIN -> NavigationRoute.ADMIN_HOME
+                                        UserRole.EMPLOYEE -> NavigationRoute.EMPLOYEE_HOME
+                                        else -> NavigationRoute.HOME
+                                    }
+                                    
+                                    navController.navigate(destination) {
                                         popUpTo(navController.graph.startDestinationId) {
                                             inclusive = true
                                         }

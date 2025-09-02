@@ -7,6 +7,8 @@ data class User(
     val email: String,
     val username: String,
     val profile: UserProfile,
+    val role: UserRole = UserRole.CUSTOMER,
+    val employeeData: EmployeeData? = null,
     val createdAt: Date = Date(),
     val lastLoginAt: Date? = null,
     val isActive: Boolean = true,
@@ -23,7 +25,8 @@ data class UserProfile(
     val dateOfBirth: Date? = null,
     val gender: Gender? = null,
     val location: Location? = null,
-    val preferences: UserPreferences = UserPreferences()
+    val preferences: UserPreferences = UserPreferences(),
+    val eyeData: List<EyeData> = emptyList()
 )
 
 data class Location(
@@ -47,6 +50,29 @@ enum class Gender {
 
 enum class Theme {
     LIGHT, DARK, SYSTEM
+}
+
+enum class UserRole {
+    CUSTOMER,
+    EMPLOYEE,
+    ADMIN
+}
+
+data class EmployeeData(
+    val employeeId: String,
+    val department: String,
+    val position: String,
+    val permissions: List<Permission> = emptyList(),
+    val assignedCustomers: List<String> = emptyList()
+)
+
+enum class Permission {
+    VIEW_CUSTOMER_PROFILES,
+    EDIT_CUSTOMER_PROFILES,
+    VIEW_EYE_PHOTOS,
+    UPLOAD_EYE_PHOTOS,
+    MANAGE_APPOINTMENTS,
+    GENERATE_REPORTS
 }
 
 data class AuthCredentials(
