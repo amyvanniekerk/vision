@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens
+package com.example.vision.presentation.screens.employee
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -243,7 +244,7 @@ private fun EmployeeWelcomeCard(
 @Composable
 private fun EmployeeActionCard(
     title: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     description: String,
     gradient: Brush,
     modifier: Modifier = Modifier,
@@ -437,7 +438,7 @@ private fun QuickStatsCard(customers: List<User> = emptyList()) {
 private fun StatItem(
     label: String,
     value: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     modifier: Modifier = Modifier
 ) {
     Surface(
