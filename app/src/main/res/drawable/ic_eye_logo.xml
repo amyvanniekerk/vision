@@ -4,16 +4,21 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#4A90E2"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
+    
     <!-- Eye Shape (White) -->
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:fillColor="#FFFFFF"
         android:pathData="M24,54 Q54,34 84,54 Q54,74 24,54"/>
     
     <!-- Iris (Blue) -->
     <path
-        android:fillColor="#4A90E2"
+        android:fillColor="#2E7CD6"
         android:pathData="M54,54m-15,0a15,15 0,1 1,30 0a15,15 0,1 1,-30 0"/>
     
     <!-- Pupil (Black) -->
@@ -28,23 +33,23 @@
     
     <!-- Eyelashes -->
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M30,38 L28,34"/>
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M40,35 L39,31"/>
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M50,34 L50,30"/>
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M60,35 L61,31"/>
     <path
-        android:strokeColor="#4A90E2"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M70,38 L72,34"/>
 </vector>

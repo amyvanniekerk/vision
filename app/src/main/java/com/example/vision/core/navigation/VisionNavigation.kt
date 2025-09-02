@@ -30,6 +30,7 @@ import com.example.vision.presentation.screens.onboarding.RegisterScreen
 import com.example.vision.presentation.screens.profile.ProfileScreen
 import com.example.vision.presentation.screens.settings.AppearanceScreen
 import com.example.vision.presentation.screens.settings.SettingsScreen
+import com.example.vision.presentation.screens.splash.SplashScreen
 
 @Composable
 fun VisionNavigation(
@@ -40,17 +41,27 @@ fun VisionNavigation(
     val authState by authViewModel.state.collectAsStateWithLifecycle()
     val customerState by customerViewModel.state.collectAsStateWithLifecycle()
     
-    val startDestination = when {
-        !authState.isAuthenticated -> NavigationRoute.LOGIN
-        authState.user?.role == UserRole.ADMIN -> NavigationRoute.ADMIN_HOME
-        authState.user?.role == UserRole.EMPLOYEE -> NavigationRoute.EMPLOYEE_HOME
-        else -> NavigationRoute.HOME
-    }
-    
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = NavigationRoute.SPLASH
     ) {
+        composable(NavigationRoute.SPLASH) {
+            SplashScreen(
+                onNavigateToMain = {
+                    val destination = when {
+                        !authState.isAuthenticated -> NavigationRoute.LOGIN
+                        authState.user?.role == UserRole.ADMIN -> NavigationRoute.ADMIN_HOME
+                        authState.user?.role == UserRole.EMPLOYEE -> NavigationRoute.EMPLOYEE_HOME
+                        else -> NavigationRoute.HOME
+                    }
+                    navController.navigate(destination) {
+                        popUpTo(NavigationRoute.SPLASH) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+        
         composable(NavigationRoute.LOGIN) {
             LoginScreen(
                 onNavigateToRegister = {
