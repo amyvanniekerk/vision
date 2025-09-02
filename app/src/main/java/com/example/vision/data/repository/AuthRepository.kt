@@ -24,12 +24,20 @@ class AuthRepository @Inject constructor() {
         return try {
             delay(1000)
             
-            if (credentials.email == "test@example.com" && credentials.password == "password") {
-                val user = createMockUser(credentials.email)
-                _currentUser.value = user
-                Result.success(user)
-            } else {
-                Result.failure(Exception("Invalid credentials"))
+            when {
+                credentials.email == "test@example.com" && credentials.password == "password" -> {
+                    val user = createMockAdmin(credentials.email)
+                    _currentUser.value = user
+                    Result.success(user)
+                }
+                credentials.email == "customer@example.com" && credentials.password == "password" -> {
+                    val user = createMockCustomer(credentials.email)
+                    _currentUser.value = user
+                    Result.success(user)
+                }
+                else -> {
+                    Result.failure(Exception("Invalid credentials"))
+                }
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -86,7 +94,7 @@ class AuthRepository @Inject constructor() {
         }
     }
     
-    private fun createMockUser(email: String): User {
+    private fun createMockAdmin(email: String): User {
         return User(
             id = "admin_001",
             email = email,
@@ -98,6 +106,26 @@ class AuthRepository @Inject constructor() {
                 displayName = "Amy",
                 bio = "System Administrator",
                 gender = Gender.FEMALE
+            ),
+            createdAt = Date(),
+            lastLoginAt = Date(),
+            isActive = true,
+            isEmailVerified = true
+        )
+    }
+    
+    private fun createMockCustomer(email: String): User {
+        return User(
+            id = "customer_demo",
+            email = email,
+            username = "customer_demo",
+            role = com.example.vision.data.model.UserRole.CUSTOMER,
+            profile = UserProfile(
+                firstName = "Demo",
+                lastName = "Customer",
+                displayName = "Demo Customer",
+                bio = "Sample customer account",
+                gender = Gender.PREFER_NOT_TO_SAY
             ),
             createdAt = Date(),
             lastLoginAt = Date(),

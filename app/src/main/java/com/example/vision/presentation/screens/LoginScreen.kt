@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.presentation.state.AuthEvent
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
 
@@ -38,22 +39,26 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
-    
+
     LaunchedEffect(viewModel) {
         viewModel.effect.collectLatest { effect ->
             when (effect) {
                 is AuthEffect.NavigateToHome -> onNavigateToHome()
                 is AuthEffect.ShowError -> {
-                    
+
                 }
+
                 is AuthEffect.ShowSuccess -> {
-                    
+
                 }
+
                 else -> {}
             }
         }
     }
-    
+
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,16 +77,16 @@ fun LoginScreen(
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
-            
+
             Text(
                 text = "Sign in to continue",
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
-            
+
             Spacer(modifier = Modifier.height(32.dp))
-            
+
             VisionTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -93,7 +98,7 @@ fun LoginScreen(
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             VisionTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -102,22 +107,22 @@ fun LoginScreen(
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
-                            imageVector = if (passwordVisible) Icons.Default.VisibilityOff 
-                                         else Icons.Default.Visibility,
-                            contentDescription = if (passwordVisible) "Hide password" 
-                                               else "Show password"
+                            imageVector = if (passwordVisible) Icons.Default.VisibilityOff
+                            else Icons.Default.Visibility,
+                            contentDescription = if (passwordVisible) "Hide password"
+                            else "Show password"
                         )
                     }
                 },
-                visualTransformation = if (passwordVisible) VisualTransformation.None 
-                                       else PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             if (state.error != null) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -134,43 +139,45 @@ fun LoginScreen(
                     )
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
-            Button(
+
+            StandardButton(
+                text = "Sign In",
                 onClick = {
                     viewModel.handleEvent(AuthEvent.Login(email, password))
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
                 enabled = !state.isLoading,
-                shape = RoundedCornerShape(80.dp)
+                isLoading = state.isLoading
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                if (state.isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text(
-                        text = "Sign In",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
-                    )
+                OutlinedButton(
+                    onClick = {
+                        email = "test@example.com"
+                        password = "password"
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(80.dp)
+                ) {
+                    Text("Use Admin Account")
+                }
+
+                OutlinedButton(
+                    onClick = {
+                        email = "customer@example.com"
+                        password = "password"
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(80.dp)
+                ) {
+                    Text("Use Customer Account")
                 }
             }
-            
-            TextButton(
-                onClick = { 
-                    email = "test@example.com"
-                    password = "password"
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Use Demo Account")
-            }
-            
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,

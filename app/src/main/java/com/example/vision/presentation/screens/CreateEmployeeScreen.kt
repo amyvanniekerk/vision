@@ -16,6 +16,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.*
+import com.example.vision.presentation.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -212,7 +213,8 @@ fun CreateEmployeeScreen(
             }
             
             // Create Button
-            Button(
+            StandardButton(
+                text = "Create Employee Account",
                 onClick = {
                     if (validateForm(firstName, lastName, email, username, password, department, position)) {
                         val newEmployee = User(
@@ -239,25 +241,11 @@ fun CreateEmployeeScreen(
                         errorMessage = "Please fill in all required fields"
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
                 enabled = firstName.isNotBlank() && lastName.isNotBlank() && 
                          email.isNotBlank() && username.isNotBlank() && 
-                         password.isNotBlank() && department.isNotBlank() && position.isNotBlank()
-            ) {
-                Icon(
-                    Icons.Default.PersonAdd,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Create Employee Account",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
+                         password.isNotBlank() && department.isNotBlank() && position.isNotBlank(),
+                icon = Icons.Default.PersonAdd
+            )
             
             Spacer(modifier = Modifier.height(16.dp))
         }

@@ -24,6 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.presentation.state.AuthEvent
 import com.example.vision.presentation.state.AuthEffect
 import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
 
@@ -42,22 +43,24 @@ fun RegisterScreen(
     var lastName by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
-    
+
     LaunchedEffect(viewModel) {
         viewModel.effect.collectLatest { effect ->
             when (effect) {
                 is AuthEffect.NavigateToHome -> onNavigateToHome()
                 is AuthEffect.ShowError -> {
-                    
+
                 }
+
                 is AuthEffect.ShowSuccess -> {
-                    
+
                 }
+
                 else -> {}
             }
         }
     }
-    
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -77,16 +80,16 @@ fun RegisterScreen(
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
-            
+
             Text(
                 text = "Sign up to get started",
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
-            
+
             Spacer(modifier = Modifier.height(24.dp))
-            
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -102,7 +105,7 @@ fun RegisterScreen(
                     ),
                     modifier = Modifier.weight(1f)
                 )
-                
+
                 VisionTextField(
                     value = lastName,
                     onValueChange = { lastName = it },
@@ -114,7 +117,7 @@ fun RegisterScreen(
                     modifier = Modifier.weight(1f)
                 )
             }
-            
+
             VisionTextField(
                 value = username,
                 onValueChange = { username = it },
@@ -126,7 +129,7 @@ fun RegisterScreen(
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             VisionTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -138,7 +141,7 @@ fun RegisterScreen(
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             VisionTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -147,22 +150,22 @@ fun RegisterScreen(
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
-                            imageVector = if (passwordVisible) Icons.Default.VisibilityOff 
-                                         else Icons.Default.Visibility,
-                            contentDescription = if (passwordVisible) "Hide password" 
-                                               else "Show password"
+                            imageVector = if (passwordVisible) Icons.Default.VisibilityOff
+                            else Icons.Default.Visibility,
+                            contentDescription = if (passwordVisible) "Hide password"
+                            else "Show password"
                         )
                     }
                 },
-                visualTransformation = if (passwordVisible) VisualTransformation.None 
-                                       else PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Next
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             VisionTextField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
@@ -171,15 +174,15 @@ fun RegisterScreen(
                 trailingIcon = {
                     IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(
-                            imageVector = if (confirmPasswordVisible) Icons.Default.VisibilityOff 
-                                         else Icons.Default.Visibility,
-                            contentDescription = if (confirmPasswordVisible) "Hide password" 
-                                               else "Show password"
+                            imageVector = if (confirmPasswordVisible) Icons.Default.VisibilityOff
+                            else Icons.Default.Visibility,
+                            contentDescription = if (confirmPasswordVisible) "Hide password"
+                            else "Show password"
                         )
                     }
                 },
-                visualTransformation = if (confirmPasswordVisible) VisualTransformation.None 
-                                       else PasswordVisualTransformation(),
+                visualTransformation = if (confirmPasswordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
@@ -187,7 +190,7 @@ fun RegisterScreen(
                 isError = confirmPassword.isNotEmpty() && password != confirmPassword,
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             if (confirmPassword.isNotEmpty() && password != confirmPassword) {
                 Text(
                     text = "Passwords do not match",
@@ -196,7 +199,7 @@ fun RegisterScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-            
+
             if (state.error != null) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -213,10 +216,11 @@ fun RegisterScreen(
                     )
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
-            Button(
+
+            StandardButton(
+                text = "Sign Up",
                 onClick = {
                     if (password == confirmPassword) {
                         viewModel.handleEvent(
@@ -230,26 +234,10 @@ fun RegisterScreen(
                         )
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
                 enabled = !state.isLoading && password == confirmPassword,
-                shape = RoundedCornerShape(80.dp)
-            ) {
-                if (state.isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text(
-                        text = "Sign Up",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
-            }
-            
+                isLoading = state.isLoading
+            )
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,

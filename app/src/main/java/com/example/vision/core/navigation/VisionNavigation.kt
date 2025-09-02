@@ -166,6 +166,9 @@ fun VisionNavigation(
                     navController.navigate(NavigationRoute.customerDetails(customer.id)) {
                         launchSingleTop = true
                     }
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
                 }
             )
         }
