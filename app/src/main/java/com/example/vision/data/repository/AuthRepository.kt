@@ -92,11 +92,11 @@ class AuthRepository @Inject constructor() {
             email = email,
             username = "testuser",
             profile = UserProfile(
-                firstName = "John",
-                lastName = "Doe",
-                displayName = "John Doe",
+                firstName = "Amy",
+                lastName = "Van Niekerk",
+                displayName = "Amy",
                 bio = "Software Developer",
-                gender = Gender.MALE
+                gender = Gender.FEMALE
             ),
             createdAt = Date(),
             lastLoginAt = Date(),

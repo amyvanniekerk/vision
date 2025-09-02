@@ -12,22 +12,22 @@ import javax.inject.Singleton
 
 @Singleton
 class EyeCareRepository @Inject constructor() {
-    
+
     private val _appointments = MutableStateFlow(getDemoAppointments())
     val appointments: Flow<List<Appointment>> = _appointments.asStateFlow()
-    
+
     private val _careInstructions = MutableStateFlow(getDemoCareInstructions())
     val careInstructions: Flow<List<CareInstruction>> = _careInstructions.asStateFlow()
-    
+
     private val _patientJourney = MutableStateFlow(getDemoPatientJourney())
     val patientJourney: Flow<PatientJourney> = _patientJourney.asStateFlow()
-    
+
     private val _eyeData = MutableStateFlow(getDemoEyeData())
     val eyeData: Flow<EyeData?> = _eyeData.asStateFlow()
-    
+
     private val _replacementSchedule = MutableStateFlow(getDemoReplacementSchedule())
     val replacementSchedule: Flow<ReplacementSchedule?> = _replacementSchedule.asStateFlow()
-    
+
     fun updateAppointmentStatus(appointmentId: String, status: AppointmentStatus) {
         _appointments.value = _appointments.value.map { appointment ->
             if (appointment.id == appointmentId) {
@@ -37,7 +37,7 @@ class EyeCareRepository @Inject constructor() {
             }
         }
     }
-    
+
     fun markCareInstructionCompleted(instructionId: String) {
         _careInstructions.value = _careInstructions.value.map { instruction ->
             if (instruction.id == instructionId) {
@@ -50,7 +50,7 @@ class EyeCareRepository @Inject constructor() {
             }
         }
     }
-    
+
     fun updateJourneyMilestone(milestoneId: String, completed: Boolean) {
         val currentJourney = _patientJourney.value
         val updatedMilestones = currentJourney.milestones.map { milestone ->
@@ -62,7 +62,7 @@ class EyeCareRepository @Inject constructor() {
         }
         _patientJourney.value = currentJourney.copy(milestones = updatedMilestones)
     }
-    
+
     fun addEyePhoto(photo: EyePhoto) {
         _eyeData.value?.let { currentData ->
             _eyeData.value = currentData.copy(
@@ -70,7 +70,7 @@ class EyeCareRepository @Inject constructor() {
             )
         }
     }
-    
+
     private fun getDemoAppointments(): List<Appointment> = listOf(
         Appointment(
             id = "1",
@@ -103,7 +103,7 @@ class EyeCareRepository @Inject constructor() {
             status = AppointmentStatus.COMPLETED
         )
     )
-    
+
     private fun getDemoCareInstructions(): List<CareInstruction> = listOf(
         CareInstruction(
             id = "1",
@@ -141,7 +141,7 @@ class EyeCareRepository @Inject constructor() {
             lastCompletedDate = LocalDate.now().toString()
         )
     )
-    
+
     private fun getDemoPatientJourney(): PatientJourney {
         val milestones = listOf(
             JourneyMilestone(
@@ -185,7 +185,7 @@ class EyeCareRepository @Inject constructor() {
                 isCompleted = false
             )
         )
-        
+
         return PatientJourney(
             id = "journey1",
             patientId = "patient1",
@@ -195,7 +195,7 @@ class EyeCareRepository @Inject constructor() {
             nextMilestone = milestones[3]
         )
     }
-    
+
     private fun getDemoEyeData(): EyeData = EyeData(
         id = "eye1",
         patientId = "patient1",
@@ -219,7 +219,7 @@ class EyeCareRepository @Inject constructor() {
         fittingDate = LocalDate.now().minusMonths(1),
         photos = emptyList()
     )
-    
+
     private fun getDemoReplacementSchedule(): ReplacementSchedule = ReplacementSchedule(
         prostheticId = "prosthetic1",
         installDate = LocalDate.now().minusMonths(1),
