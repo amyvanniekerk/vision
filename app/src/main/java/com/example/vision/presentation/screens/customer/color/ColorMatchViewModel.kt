@@ -1,10 +1,11 @@
-package com.example.vision.presentation.viewmodel
+package com.example.vision.presentation.screens.customer.color
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vision.data.model.*
 import com.example.vision.data.repository.EyeCareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -53,7 +54,7 @@ class ColorMatchViewModel @Inject constructor(
         
         // Simulate color analysis delay
         viewModelScope.launch {
-            kotlinx.coroutines.delay(2000)
+            delay(2000)
             
             val result = ColorMatchResult(
                 matchPercentage = 92.5f,

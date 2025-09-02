@@ -16,16 +16,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.vision.R
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.*
-import com.example.vision.presentation.state.AuthEvent
-import com.example.vision.presentation.viewmodel.AuthViewModel
-import com.example.vision.presentation.viewmodel.JourneyViewModel
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
+import com.example.vision.presentation.screens.customer.journey.JourneyViewModel
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -439,11 +441,11 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = when (schedule.condition) {
-                ProstheticCondition.EXCELLENT -> Color(0xFF4CAF50)
-                ProstheticCondition.GOOD -> Color(0xFF8BC34A)
-                ProstheticCondition.FAIR -> Color(0xFFFFC107)
-                ProstheticCondition.NEEDS_ATTENTION -> Color(0xFFFF9800)
-                ProstheticCondition.REPLACE_SOON -> Color(0xFFF44336)
+                ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
+                ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
+                ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
+                ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
+                ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
             }.copy(alpha = 0.1f)
         )
     ) {
@@ -465,11 +467,11 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = when (schedule.condition) {
-                        ProstheticCondition.EXCELLENT -> Color(0xFF4CAF50)
-                        ProstheticCondition.GOOD -> Color(0xFF8BC34A)
-                        ProstheticCondition.FAIR -> Color(0xFFFFC107)
-                        ProstheticCondition.NEEDS_ATTENTION -> Color(0xFFFF9800)
-                        ProstheticCondition.REPLACE_SOON -> Color(0xFFF44336)
+                        ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
+                        ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
+                        ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
+                        ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
+                        ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
                     }
                 )
             }
@@ -485,11 +487,11 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
                 contentDescription = null,
                 modifier = Modifier.size(32.dp),
                 tint = when (schedule.condition) {
-                    ProstheticCondition.EXCELLENT -> Color(0xFF4CAF50)
-                    ProstheticCondition.GOOD -> Color(0xFF8BC34A)
-                    ProstheticCondition.FAIR -> Color(0xFFFFC107)
-                    ProstheticCondition.NEEDS_ATTENTION -> Color(0xFFFF9800)
-                    ProstheticCondition.REPLACE_SOON -> Color(0xFFF44336)
+                    ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
+                    ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
+                    ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
+                    ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
+                    ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
                 }
             )
         }

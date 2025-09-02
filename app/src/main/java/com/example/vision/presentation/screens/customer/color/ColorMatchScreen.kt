@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens.customer
+package com.example.vision.presentation.screens.customer.color
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -28,7 +28,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.ColorMatchResult
 import com.example.vision.data.model.EyeData
 import com.example.vision.data.model.PhotoType
-import com.example.vision.presentation.viewmodel.ColorMatchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

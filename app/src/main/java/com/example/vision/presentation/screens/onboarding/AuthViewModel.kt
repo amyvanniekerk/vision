@@ -1,10 +1,10 @@
-package com.example.vision.presentation.viewmodel
+package com.example.vision.presentation.screens.onboarding
 
 import com.example.vision.core.base.BaseViewModel
 import com.example.vision.domain.controller.AuthController
-import com.example.vision.presentation.state.AuthEffect
-import com.example.vision.presentation.state.AuthEvent
-import com.example.vision.presentation.state.AuthState
+import com.example.vision.presentation.screens.onboarding.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens.customer
+package com.example.vision.presentation.screens.customer.details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

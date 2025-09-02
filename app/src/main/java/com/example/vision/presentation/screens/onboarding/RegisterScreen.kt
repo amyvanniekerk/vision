@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.presentation.state.AuthEvent
-import com.example.vision.presentation.state.AuthEffect
-import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import com.example.vision.ui.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest

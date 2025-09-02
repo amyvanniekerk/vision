@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens.profile.settings
+package com.example.vision.presentation.screens.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

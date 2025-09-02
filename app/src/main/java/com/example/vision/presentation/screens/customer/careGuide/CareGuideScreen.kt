@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens.customer
+package com.example.vision.presentation.screens.customer.careGuide
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,10 +14,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.vision.R
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -383,7 +383,7 @@ private fun ExpandableCareStepsCard(
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.White
+                                color = colorResource(id = R.color.white)
                             )
                         }
                     }
@@ -423,7 +423,7 @@ private fun ExpandableCareStepsCard(
                             text = "1",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color.White
+                            color = colorResource(id = R.color.white)
                         )
                     }
 
@@ -489,7 +489,7 @@ private fun CareStepItem(
                     text = stepNumber.toString(),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = colorResource(id = R.color.white)
                 )
             }
 
@@ -554,7 +554,6 @@ private fun AvoidanceItem(
             )
             Text(
                 text = description,
-                color = colorResource(id = Color.Black),
                 fontSize = 13.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 lineHeight = 18.sp

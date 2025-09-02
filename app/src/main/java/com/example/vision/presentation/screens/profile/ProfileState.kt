@@ -1,4 +1,4 @@
-package com.example.vision.presentation.state
+package com.example.vision.presentation.screens.profile
 
 import com.example.vision.data.model.UserProfile
 

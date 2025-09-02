@@ -12,8 +12,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import com.example.vision.R
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -22,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.presentation.state.AuthEvent
-import com.example.vision.presentation.state.AuthEffect
-import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import com.example.vision.ui.components.StandardButton
 import com.example.vision.ui.components.VisionTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -186,7 +188,7 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "Don't have an account?",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colorResource(id = R.color.vision_text_secondary)
                 )
                 TextButton(onClick = onNavigateToRegister) {
                     Text("Sign Up")

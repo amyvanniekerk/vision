@@ -16,11 +16,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.example.vision.core.navigation.VisionNavigation
-import com.example.vision.presentation.state.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthEffect
 import com.example.vision.presentation.state.NavigationRoute
 import com.example.vision.data.model.UserRole
 import com.example.vision.data.preferences.ThemePreferences
-import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import com.example.vision.ui.theme.ThemeType
 import com.example.vision.ui.theme.VisionTheme
 import dagger.hilt.android.AndroidEntryPoint

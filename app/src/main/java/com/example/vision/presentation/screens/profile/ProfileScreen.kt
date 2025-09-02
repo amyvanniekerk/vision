@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.Location
-import com.example.vision.presentation.state.ProfileEvent
-import com.example.vision.presentation.viewmodel.ProfileViewModel
+import com.example.vision.presentation.screens.profile.ProfileEvent
+import com.example.vision.presentation.screens.profile.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

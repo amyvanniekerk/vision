@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Vision App Eye-Friendly Colors -->
+    <color name="vision_text_primary">#FF1A1A1A</color>
+    <color name="vision_text_secondary">#FF666666</color>
+    <color name="vision_text_accent">#FF2196F3</color>
+    <color name="vision_background_primary">#FFFFFFFF</color>
+    <color name="vision_background_card">#FFF8F9FA</color>
+    <color name="vision_error">#FFE53E3E</color>
+    <color name="vision_success">#FF38A169</color>
+    <color name="vision_warning">#FFD69E2E</color>
 </resources>

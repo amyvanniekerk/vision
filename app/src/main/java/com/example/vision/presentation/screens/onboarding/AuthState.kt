@@ -1,4 +1,4 @@
-package com.example.vision.presentation.state
+package com.example.vision.presentation.screens.onboarding
 
 import com.example.vision.data.model.User
 

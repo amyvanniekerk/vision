@@ -1,4 +1,4 @@
-package com.example.vision.presentation.screens.profile.settings
+package com.example.vision.presentation.screens.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,8 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.presentation.state.SettingsEvent
-import com.example.vision.presentation.viewmodel.SettingsViewModel
 import com.example.vision.ui.theme.ThemeType
 
 @OptIn(ExperimentalMaterial3Api::class)

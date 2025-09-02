@@ -1,11 +1,11 @@
-package com.example.vision.presentation.viewmodel
+package com.example.vision.presentation.screens.profile
 
 import com.example.vision.core.base.BaseViewModel
 import com.example.vision.data.model.UserProfile
 import com.example.vision.data.repository.AuthRepository
-import com.example.vision.presentation.state.ProfileEffect
-import com.example.vision.presentation.state.ProfileEvent
-import com.example.vision.presentation.state.ProfileState
+import com.example.vision.presentation.screens.profile.ProfileEffect
+import com.example.vision.presentation.screens.profile.ProfileEvent
+import com.example.vision.presentation.screens.profile.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

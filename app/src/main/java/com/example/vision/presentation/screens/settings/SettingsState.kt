@@ -1,4 +1,4 @@
-package com.example.vision.presentation.state
+package com.example.vision.presentation.screens.settings
 
 import com.example.vision.ui.theme.ThemeType
 

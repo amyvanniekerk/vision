@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.User
-import com.example.vision.presentation.state.AuthEvent
-import com.example.vision.presentation.viewmodel.AuthViewModel
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
