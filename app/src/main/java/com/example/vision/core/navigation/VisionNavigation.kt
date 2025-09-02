@@ -7,10 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.vision.presentation.screens.HomeScreen
-import com.example.vision.presentation.screens.LoginScreen
-import com.example.vision.presentation.screens.ProfileScreen
-import com.example.vision.presentation.screens.RegisterScreen
+import com.example.vision.presentation.screens.*
 import com.example.vision.presentation.state.NavigationRoute
 import com.example.vision.presentation.viewmodel.AuthViewModel
 
@@ -70,12 +67,38 @@ fun VisionNavigation(
                     navController.navigate(NavigationRoute.PROFILE) {
                         launchSingleTop = true
                     }
+                },
+                onNavigateToJourney = {
+                    navController.navigate(NavigationRoute.JOURNEY) {
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToColorMatch = {
+                    navController.navigate(NavigationRoute.COLOR_MATCH) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }
         
         composable(NavigationRoute.PROFILE) {
             ProfileScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable(NavigationRoute.JOURNEY) {
+            JourneyScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable(NavigationRoute.COLOR_MATCH) {
+            ColorMatchScreen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }
