@@ -79,7 +79,7 @@ fun AdminHomeScreen(
             // Welcome Section
             item {
                 AdminWelcomeCard(
-                    adminName = user?.profile?.displayName ?: "Administrator"
+                    adminName = user?.profile?.displayName ?: ""
                 )
             }
             

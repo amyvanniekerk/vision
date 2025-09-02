@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
@@ -82,6 +83,16 @@ fun ExpandableCareStepsCard(
                                 color = colorResource(id = R.color.white)
                             )
                         }
+                        Spacer(Modifier.weight(1f))
+                        Icon(
+                            imageVector = if (isExpanded) {
+                                Icons.Default.ExpandLess
+                            } else {
+                                Icons.Default.ExpandMore
+                            },
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
                     }
                     Text(
                         text = subtitle,
@@ -90,16 +101,6 @@ fun ExpandableCareStepsCard(
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 }
-
-                Icon(
-                    imageVector = if (isExpanded) {
-                        Icons.Default.ExpandLess
-                    } else {
-                        Icons.Default.ExpandMore
-                    },
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
             }
 
             // First step preview when collapsed
