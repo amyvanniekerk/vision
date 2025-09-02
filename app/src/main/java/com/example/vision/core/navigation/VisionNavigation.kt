@@ -15,6 +15,7 @@ import com.example.vision.presentation.viewmodel.AuthViewModel
 import com.example.vision.presentation.viewmodel.CustomerViewModel
 import com.example.vision.presentation.viewmodel.CustomerEvent
 import com.example.vision.data.model.UserRole
+import com.example.vision.presentation.screens.customer.CareGuideScreen
 import com.example.vision.presentation.screens.customer.ColorMatchScreen
 import com.example.vision.presentation.screens.customer.CustomerDetailsScreen
 import com.example.vision.presentation.screens.customer.CustomerListScreen
@@ -97,6 +98,11 @@ fun VisionNavigation(
                 },
                 onNavigateToColorMatch = {
                     navController.navigate(NavigationRoute.COLOR_MATCH) {
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToCareGuide = {
+                    navController.navigate(NavigationRoute.CARE_GUIDE) {
                         launchSingleTop = true
                     }
                 }
@@ -254,6 +260,14 @@ fun VisionNavigation(
         
         composable(NavigationRoute.COLOR_MATCH) {
             ColorMatchScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable(NavigationRoute.CARE_GUIDE) {
+            CareGuideScreen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }

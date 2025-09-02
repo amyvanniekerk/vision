@@ -22,6 +22,7 @@ object NavigationRoute {
     const val SPLASH = "splash"
     const val JOURNEY = "journey"
     const val COLOR_MATCH = "color_match"
+    const val CARE_GUIDE = "care_guide"
     
     fun customerDetails(customerId: String) = "customer_details/$customerId"
 }

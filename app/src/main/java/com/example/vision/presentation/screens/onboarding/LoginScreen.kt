@@ -153,6 +153,7 @@ fun LoginScreen(
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedButton(
@@ -163,7 +164,7 @@ fun LoginScreen(
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(80.dp)
                 ) {
-                    Text("Use Admin Account")
+                    Text("Admin Account")
                 }
 
                 OutlinedButton(
@@ -174,7 +175,7 @@ fun LoginScreen(
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(80.dp)
                 ) {
-                    Text("Use Customer Account")
+                    Text("Customer Account")
                 }
             }
 

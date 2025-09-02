@@ -35,6 +35,7 @@ fun HomeScreen(
     onNavigateToProfile: () -> Unit,
     onNavigateToJourney: () -> Unit,
     onNavigateToColorMatch: () -> Unit,
+    onNavigateToCareGuide: () -> Unit = {},
     authViewModel: AuthViewModel = hiltViewModel(),
     journeyViewModel: JourneyViewModel = hiltViewModel()
 ) {
@@ -122,7 +123,7 @@ fun HomeScreen(
                             title = "Care Guide",
                             icon = Icons.Default.HealthAndSafety,
                             backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            onClick = { /* TODO */ }
+                            onClick = onNavigateToCareGuide
                         )
                     }
                 }
