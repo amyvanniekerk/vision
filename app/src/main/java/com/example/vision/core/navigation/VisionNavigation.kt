@@ -70,7 +70,12 @@ fun VisionNavigation(
                     }
                 },
                 onNavigateToHome = {
-                    navController.navigate(NavigationRoute.HOME) {
+                    val destination = when (authState.user?.role) {
+                        UserRole.ADMIN -> NavigationRoute.ADMIN_HOME
+                        UserRole.EMPLOYEE -> NavigationRoute.EMPLOYEE_HOME
+                        else -> NavigationRoute.HOME
+                    }
+                    navController.navigate(destination) {
                         popUpTo(NavigationRoute.LOGIN) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -87,7 +92,12 @@ fun VisionNavigation(
                     }
                 },
                 onNavigateToHome = {
-                    navController.navigate(NavigationRoute.HOME) {
+                    val destination = when (authState.user?.role) {
+                        UserRole.ADMIN -> NavigationRoute.ADMIN_HOME
+                        UserRole.EMPLOYEE -> NavigationRoute.EMPLOYEE_HOME
+                        else -> NavigationRoute.HOME
+                    }
+                    navController.navigate(destination) {
                         popUpTo(NavigationRoute.REGISTER) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -145,6 +155,14 @@ fun VisionNavigation(
                     navController.navigate(NavigationRoute.customerDetails(customer.id)) {
                         launchSingleTop = true
                     }
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavigationRoute.LOGIN) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 }
             )
         }
@@ -165,6 +183,14 @@ fun VisionNavigation(
                 },
                 onNavigateToCustomerList = {
                     navController.navigate(NavigationRoute.CUSTOMER_LIST) {
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavigationRoute.LOGIN) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
                         launchSingleTop = true
                     }
                 }
@@ -255,6 +281,14 @@ fun VisionNavigation(
                 },
                 onNavigateToAppearance = {
                     navController.navigate(NavigationRoute.APPEARANCE) {
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavigationRoute.LOGIN) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
                         launchSingleTop = true
                     }
                 }

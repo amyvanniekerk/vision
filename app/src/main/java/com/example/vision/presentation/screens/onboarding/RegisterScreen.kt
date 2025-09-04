@@ -21,11 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.presentation.screens.onboarding.AuthEvent
-import com.example.vision.presentation.screens.onboarding.AuthEffect
-import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import com.example.vision.ui.components.StandardButton
-import com.example.vision.ui.components.VisionTextField
+import com.example.vision.ui.components.StandardInputField
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -94,7 +91,7 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                VisionTextField(
+                StandardInputField(
                     value = firstName,
                     onValueChange = { firstName = it },
                     label = "First Name",
@@ -106,7 +103,7 @@ fun RegisterScreen(
                     modifier = Modifier.weight(1f)
                 )
 
-                VisionTextField(
+                StandardInputField(
                     value = lastName,
                     onValueChange = { lastName = it },
                     label = "Last Name",
@@ -118,7 +115,7 @@ fun RegisterScreen(
                 )
             }
 
-            VisionTextField(
+            StandardInputField(
                 value = username,
                 onValueChange = { username = it },
                 label = "Username",
@@ -130,7 +127,7 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            VisionTextField(
+            StandardInputField(
                 value = email,
                 onValueChange = { email = it },
                 label = "Email",
@@ -142,7 +139,7 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            VisionTextField(
+            StandardInputField(
                 value = password,
                 onValueChange = { password = it },
                 label = "Password",
@@ -165,7 +162,7 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            VisionTextField(
+            StandardInputField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
                 label = "Confirm Password",

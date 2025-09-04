@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.*
 import com.example.vision.ui.components.StandardButton
-import com.example.vision.ui.components.VisionTextField
+import com.example.vision.ui.components.StandardInputField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,7 +91,7 @@ fun CreateEmployeeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        VisionTextField(
+                        StandardInputField(
                             value = firstName,
                             onValueChange = { firstName = it },
                             label = "First Name",
@@ -99,7 +99,7 @@ fun CreateEmployeeScreen(
                             modifier = Modifier.weight(1f)
                         )
                         
-                        VisionTextField(
+                        StandardInputField(
                             value = lastName,
                             onValueChange = { lastName = it },
                             label = "Last Name",
@@ -107,21 +107,21 @@ fun CreateEmployeeScreen(
                         )
                     }
                     
-                    VisionTextField(
+                    StandardInputField(
                         value = email,
                         onValueChange = { email = it },
                         label = "Email Address",
                         leadingIcon = Icons.Default.Email
                     )
                     
-                    VisionTextField(
+                    StandardInputField(
                         value = username,
                         onValueChange = { username = it },
                         label = "Username",
                         leadingIcon = Icons.Default.AccountCircle
                     )
                     
-                    VisionTextField(
+                    StandardInputField(
                         value = password,
                         onValueChange = { password = it },
                         label = "Password",
@@ -148,14 +148,14 @@ fun CreateEmployeeScreen(
                         fontWeight = FontWeight.SemiBold
                     )
                     
-                    VisionTextField(
+                    StandardInputField(
                         value = department,
                         onValueChange = { department = it },
                         label = "Department",
                         leadingIcon = Icons.Default.Business
                     )
                     
-                    VisionTextField(
+                    StandardInputField(
                         value = position,
                         onValueChange = { position = it },
                         label = "Position/Title",

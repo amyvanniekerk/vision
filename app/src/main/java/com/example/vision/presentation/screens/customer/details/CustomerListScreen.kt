@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.data.model.User
 import com.example.vision.presentation.screens.customer.details.components.EmptySearchResult
-import com.example.vision.ui.components.VisionTextField
+import com.example.vision.ui.components.StandardInputField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,7 +88,7 @@ fun CustomerListScreen(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
                 )
             ) {
-                VisionTextField(
+                StandardInputField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
                     label = "Search customers...",

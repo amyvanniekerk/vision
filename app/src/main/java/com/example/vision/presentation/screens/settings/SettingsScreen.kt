@@ -16,13 +16,29 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.vision.presentation.screens.onboarding.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     onNavigateBack: () -> Unit,
-    onNavigateToAppearance: () -> Unit
+    onNavigateToAppearance: () -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    authViewModel: AuthViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(authViewModel) {
+        authViewModel.effect.collectLatest { effect ->
+            when (effect) {
+                is AuthEffect.NavigateToLogin -> onNavigateToLogin()
+                else -> {}
+            }
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -62,9 +78,9 @@ fun SettingsScreen(
                     onClick = { /* Navigate to security */ }
                 )
             }
-            
+
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            
+
             // Preferences Section
             SettingsSection(title = "Preferences") {
                 SettingsItem(
@@ -86,9 +102,9 @@ fun SettingsScreen(
                     onClick = { /* Navigate to language */ }
                 )
             }
-            
+
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            
+
             // Support Section
             SettingsSection(title = "Support") {
                 SettingsItem(
@@ -110,9 +126,9 @@ fun SettingsScreen(
                     onClick = { /* Navigate to about */ }
                 )
             }
-            
+
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            
+
             // Actions Section
             SettingsSection(title = "Actions") {
                 SettingsItem(
@@ -125,11 +141,13 @@ fun SettingsScreen(
                     icon = Icons.Default.PowerSettingsNew,
                     title = "Sign Out",
                     subtitle = "Sign out of your account",
-                    onClick = { /* Sign out */ },
+                    onClick = {
+                        authViewModel.handleEvent(AuthEvent.Logout)
+                    },
                     tint = MaterialTheme.colorScheme.error
                 )
             }
-            
+
             // App Version at bottom
             Box(
                 modifier = Modifier
@@ -206,7 +224,7 @@ private fun SettingsItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    icon,
+                    imageVector = icon,
                     contentDescription = title,
                     tint = tint,
                     modifier = Modifier.size(24.dp)
@@ -219,7 +237,11 @@ private fun SettingsItem(
                         text = title,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
-                        color = if (tint == MaterialTheme.colorScheme.error) tint else MaterialTheme.colorScheme.onSurface
+                        color = if (tint == MaterialTheme.colorScheme.error) {
+                            tint
+                        } else {
+                            MaterialTheme.colorScheme.onSurface
+                        }
                     )
                     Text(
                         text = subtitle,
@@ -230,7 +252,7 @@ private fun SettingsItem(
                 }
             }
             Icon(
-                Icons.Default.ChevronRight,
+                imageVector = Icons.Default.ChevronRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.size(20.dp)

@@ -23,8 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.vision.data.model.User
+import com.example.vision.presentation.screens.onboarding.AuthEffect
 import com.example.vision.presentation.screens.onboarding.AuthEvent
 import com.example.vision.presentation.screens.onboarding.AuthViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,10 +35,20 @@ fun EmployeeHomeScreen(
     onNavigateToProfile: () -> Unit,
     onNavigateToCustomerList: () -> Unit,
     onNavigateToCustomerDetails: (User) -> Unit,
+    onNavigateToLogin: () -> Unit = {},
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
     val authState by authViewModel.state.collectAsStateWithLifecycle()
     val user = authState.user
+    
+    LaunchedEffect(authViewModel) {
+        authViewModel.effect.collectLatest { effect ->
+            when (effect) {
+                is AuthEffect.NavigateToLogin -> onNavigateToLogin()
+                else -> {}
+            }
+        }
+    }
     
     val recentCustomers = remember(customers) {
         customers.take(3)
