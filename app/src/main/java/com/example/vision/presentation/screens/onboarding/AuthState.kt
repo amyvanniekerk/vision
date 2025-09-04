@@ -14,10 +14,10 @@ sealed class AuthEvent {
     data class Register(
         val email: String,
         val password: String,
-        val username: String,
         val firstName: String,
         val lastName: String
     ) : AuthEvent()
+
     object Logout : AuthEvent()
     object ClearError : AuthEvent()
     object CheckAuthStatus : AuthEvent()

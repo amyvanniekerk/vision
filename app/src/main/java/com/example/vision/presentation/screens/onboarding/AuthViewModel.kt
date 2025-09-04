@@ -81,8 +81,7 @@ class AuthViewModel @Inject constructor(
     }
     
     private suspend fun handleRegister(event: AuthEvent.Register) {
-        if (event.email.isBlank() || event.password.isBlank() || 
-            event.username.isBlank() || event.firstName.isBlank() || 
+        if (event.email.isBlank() || event.password.isBlank() || event.firstName.isBlank() ||
             event.lastName.isBlank()) {
             updateState { copy(error = "All fields are required") }
             return
@@ -93,7 +92,6 @@ class AuthViewModel @Inject constructor(
         authController.register(
             email = event.email,
             password = event.password,
-            username = event.username,
             firstName = event.firstName,
             lastName = event.lastName
         ).fold(

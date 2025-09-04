@@ -220,7 +220,6 @@ fun CreateEmployeeScreen(
                         val newEmployee = User(
                             id = "emp_${System.currentTimeMillis()}",
                             email = email,
-                            username = username,
                             role = UserRole.EMPLOYEE,
                             profile = UserProfile(
                                 firstName = firstName,

@@ -51,7 +51,6 @@ class AuthRepository @Inject constructor() {
             val user = User(
                 id = UUID.randomUUID().toString(),
                 email = registrationData.email,
-                username = registrationData.username,
                 profile = UserProfile(
                     firstName = registrationData.firstName,
                     lastName = registrationData.lastName,
@@ -98,7 +97,6 @@ class AuthRepository @Inject constructor() {
         return User(
             id = "admin_001",
             email = email,
-            username = "admin",
             role = com.example.vision.data.model.UserRole.ADMIN,
             profile = UserProfile(
                 firstName = "Amy",
@@ -118,7 +116,6 @@ class AuthRepository @Inject constructor() {
         return User(
             id = "customer_demo",
             email = email,
-            username = "customer_demo",
             role = com.example.vision.data.model.UserRole.CUSTOMER,
             profile = UserProfile(
                 firstName = "Demo",

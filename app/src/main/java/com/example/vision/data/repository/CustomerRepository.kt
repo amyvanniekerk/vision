@@ -60,7 +60,6 @@ class CustomerRepository @Inject constructor() {
             User(
                 id = "cust_001",
                 email = "sarah.johnson@email.com",
-                username = "sarah.johnson",
                 isActive = true,
                 role = UserRole.CUSTOMER,
                 profile = UserProfile(
@@ -144,7 +143,6 @@ class CustomerRepository @Inject constructor() {
             User(
                 id = "cust_002",
                 email = "michael.chen@email.com",
-                username = "michael.chen",
                 isActive = true,
                 role = UserRole.CUSTOMER,
                 profile = UserProfile(
@@ -198,7 +196,6 @@ class CustomerRepository @Inject constructor() {
             User(
                 id = "cust_003",
                 email = "emma.rodriguez@email.com",
-                username = "emma.rodriguez",
                 isActive = true,
                 role = UserRole.CUSTOMER,
                 profile = UserProfile(

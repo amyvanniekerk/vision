@@ -5,7 +5,6 @@ import java.util.Date
 data class User(
     val id: String,
     val email: String,
-    val username: String,
     val profile: UserProfile,
     val role: UserRole = UserRole.CUSTOMER,
     val employeeData: EmployeeData? = null,
@@ -83,7 +82,6 @@ data class AuthCredentials(
 data class RegistrationData(
     val email: String,
     val password: String,
-    val username: String,
     val firstName: String,
     val lastName: String
 )

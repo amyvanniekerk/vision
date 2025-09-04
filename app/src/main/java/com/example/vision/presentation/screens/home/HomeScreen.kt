@@ -1,17 +1,50 @@
 package com.example.vision.presentation.screens.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.HealthAndSafety
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Palette
+import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.filled.Timeline
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,17 +53,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import com.example.vision.R
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.data.model.*
-import com.example.vision.presentation.screens.onboarding.AuthEvent
-import com.example.vision.presentation.screens.onboarding.AuthEffect
-import com.example.vision.presentation.screens.onboarding.AuthViewModel
+import com.example.vision.R
+import com.example.vision.data.model.Appointment
+import com.example.vision.data.model.CareInstruction
+import com.example.vision.data.model.PatientJourney
+import com.example.vision.data.model.ProstheticCondition
+import com.example.vision.data.model.ReplacementSchedule
 import com.example.vision.presentation.screens.customer.journey.JourneyViewModel
+import com.example.vision.presentation.screens.onboarding.AuthEffect
+import com.example.vision.presentation.screens.onboarding.AuthEvent
+import com.example.vision.presentation.screens.onboarding.AuthViewModel
 import kotlinx.coroutines.flow.collectLatest
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -52,7 +89,7 @@ fun HomeScreen(
     val dailyCare by journeyViewModel.dailyCareInstructions.collectAsStateWithLifecycle(emptyList())
     val journey by journeyViewModel.patientJourney.collectAsStateWithLifecycle()
     val replacementSchedule by journeyViewModel.replacementSchedule.collectAsStateWithLifecycle()
-    
+
     LaunchedEffect(authViewModel) {
         authViewModel.effect.collectLatest { effect ->
             when (effect) {
@@ -61,11 +98,11 @@ fun HomeScreen(
             }
         }
     }
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { 
+                title = {
                     Column {
                         Text(
                             "EyeCare Pro",
@@ -83,8 +120,8 @@ fun HomeScreen(
                     IconButton(onClick = onNavigateToProfile) {
                         Icon(Icons.Default.AccountCircle, contentDescription = null)
                     }
-                    IconButton(onClick = { 
-                        authViewModel.handleEvent(AuthEvent.Logout) 
+                    IconButton(onClick = {
+                        authViewModel.handleEvent(AuthEvent.Logout)
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null)
                     }
@@ -103,7 +140,7 @@ fun HomeScreen(
             item {
                 WelcomeCard(userName = user?.profile?.displayName ?: "Patient")
             }
-            
+
             // Quick Actions
             item {
                 Text(
@@ -113,7 +150,7 @@ fun HomeScreen(
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
-            
+
             item {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -144,7 +181,7 @@ fun HomeScreen(
                     }
                 }
             }
-            
+
             // Today's Care Reminder
             if (dailyCare.isNotEmpty()) {
                 item {
@@ -155,7 +192,7 @@ fun HomeScreen(
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
                 }
-                
+
                 item {
                     DailyCareCard(
                         instructions = dailyCare.take(3),
@@ -165,7 +202,7 @@ fun HomeScreen(
                     )
                 }
             }
-            
+
             // Upcoming Appointment
             appointments.firstOrNull()?.let { appointment ->
                 item {
@@ -176,12 +213,12 @@ fun HomeScreen(
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
                 }
-                
+
                 item {
                     AppointmentCard(appointment)
                 }
             }
-            
+
             // Journey Progress
             item {
                 JourneyProgressCard(
@@ -189,7 +226,7 @@ fun HomeScreen(
                     onClick = onNavigateToJourney
                 )
             }
-            
+
             // Prosthetic Status
             replacementSchedule?.let { schedule ->
                 item {
@@ -235,9 +272,9 @@ fun WelcomeCard(userName: String) {
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
-            
+
             Spacer(modifier = Modifier.width(16.dp))
-            
+
             Column {
                 Text(
                     "Welcome back, $userName!",
@@ -365,9 +402,9 @@ fun AppointmentCard(appointment: Appointment) {
                     tint = MaterialTheme.colorScheme.onSecondary
                 )
             }
-            
+
             Spacer(modifier = Modifier.width(12.dp))
-            
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     appointment.title,
@@ -384,7 +421,7 @@ fun AppointmentCard(appointment: Appointment) {
                     color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                 )
             }
-            
+
             Icon(
                 Icons.Default.ArrowForward,
                 contentDescription = null,
@@ -402,7 +439,7 @@ fun JourneyProgressCard(
     val completedCount = journey.milestones.count { it.isCompleted }
     val totalCount = journey.milestones.size
     val progress = if (totalCount > 0) completedCount.toFloat() / totalCount else 0f
-    
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick
@@ -427,9 +464,9 @@ fun JourneyProgressCard(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             LinearProgressIndicator(
                 progress = progress,
                 modifier = Modifier
@@ -437,9 +474,9 @@ fun JourneyProgressCard(
                     .height(6.dp)
                     .clip(RoundedCornerShape(3.dp))
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 "Current: ${journey.currentPhase.name.replace("_", " ")}",
                 fontSize = 12.sp,
@@ -455,11 +492,11 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = when (schedule.condition) {
-                ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
-                ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
-                ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
-                ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
-                ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
+                ProstheticCondition.EXCELLENT -> colorResource(id = R.color.success)
+                ProstheticCondition.GOOD -> colorResource(id = R.color.success)
+                ProstheticCondition.FAIR -> colorResource(id = R.color.warning)
+                ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.warning)
+                ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.error)
             }.copy(alpha = 0.1f)
         )
     ) {
@@ -481,15 +518,15 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = when (schedule.condition) {
-                        ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
-                        ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
-                        ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
-                        ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
-                        ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
+                        ProstheticCondition.EXCELLENT -> colorResource(id = R.color.success)
+                        ProstheticCondition.GOOD -> colorResource(id = R.color.success)
+                        ProstheticCondition.FAIR -> colorResource(id = R.color.warning)
+                        ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.warning)
+                        ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.error)
                     }
                 )
             }
-            
+
             Icon(
                 when (schedule.condition) {
                     ProstheticCondition.EXCELLENT -> Icons.Default.CheckCircle
@@ -501,11 +538,11 @@ fun ProstheticStatusCard(schedule: ReplacementSchedule) {
                 contentDescription = null,
                 modifier = Modifier.size(32.dp),
                 tint = when (schedule.condition) {
-                    ProstheticCondition.EXCELLENT -> colorResource(id = R.color.vision_success)
-                    ProstheticCondition.GOOD -> colorResource(id = R.color.vision_success)
-                    ProstheticCondition.FAIR -> colorResource(id = R.color.vision_warning)
-                    ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.vision_warning)
-                    ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.vision_error)
+                    ProstheticCondition.EXCELLENT -> colorResource(id = R.color.success)
+                    ProstheticCondition.GOOD -> colorResource(id = R.color.success)
+                    ProstheticCondition.FAIR -> colorResource(id = R.color.warning)
+                    ProstheticCondition.NEEDS_ATTENTION -> colorResource(id = R.color.warning)
+                    ProstheticCondition.REPLACE_SOON -> colorResource(id = R.color.error)
                 }
             )
         }
