@@ -168,8 +168,7 @@ fun AppearanceScreen(
                 }
             }
 
-            // Color Theme Selection (only in light mode)
-            if (!state.isDarkMode) {
+
                 Card(
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -205,7 +204,6 @@ fun AppearanceScreen(
                         }
                     }
                 }
-            }
 
             // Eye Care Tips Card
             Card(

@@ -21,6 +21,8 @@ data class UserProfile(
     val bio: String? = null,
     val avatarUrl: String? = null,
     val phoneNumber: String? = null,
+    val idOrPassportNumber: String? = null,
+    val email: String? = null,
     val dateOfBirth: Date? = null,
     val gender: Gender? = null,
     val location: Location? = null,

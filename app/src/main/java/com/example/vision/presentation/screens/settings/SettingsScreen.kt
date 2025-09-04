@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.vision.presentation.screens.Support.AboutBottomSheetContent
+import kotlinx.coroutines.launch
 import com.example.vision.presentation.screens.onboarding.AuthEffect
 import com.example.vision.presentation.screens.onboarding.AuthEvent
 import com.example.vision.presentation.screens.onboarding.AuthViewModel
@@ -32,6 +34,11 @@ fun SettingsScreen(
     onNavigateToLogin: () -> Unit = {},
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
+    val bottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false
+    )
+    var showAboutSheet by remember { mutableStateOf(false) }
+
     LaunchedEffect(authViewModel) {
         authViewModel.effect.collectLatest { effect ->
             when (effect) {
@@ -120,11 +127,14 @@ fun SettingsScreen(
                     subtitle = "Share your thoughts with us",
                     onClick = { /* Navigate to feedback */ }
                 )
+
                 SettingsItem(
                     icon = Icons.Default.Info,
                     title = "About",
                     subtitle = "App version and information",
-                    onClick = { /* Navigate to about */ }
+                    onClick = {
+                        showAboutSheet = true
+                    }
                 )
             }
 
@@ -172,6 +182,15 @@ fun SettingsScreen(
                     )
                 }
             }
+        }
+    }
+
+    if (showAboutSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showAboutSheet = false },
+            sheetState = bottomSheetState
+        ) {
+            AboutBottomSheetContent()
         }
     }
 }

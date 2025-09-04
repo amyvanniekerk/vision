@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -42,7 +41,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.vision.R
 import com.example.vision.ui.components.StandardButton
 import com.example.vision.ui.components.StandardInputField
 import com.example.vision.ui.modifiers.clearFocusOnTap
@@ -96,14 +94,14 @@ fun LoginScreen(
                 text = "Welcome Back",
                 style = Typography.barlowBold32,
                 textAlign = TextAlign.Center,
-                color = colorResource(R.color.black)
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Text(
                 text = "Sign in to continue",
                 style = Typography.barlowBody16,
                 textAlign = TextAlign.Center,
-                color = colorResource(R.color.black),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -161,7 +159,7 @@ fun LoginScreen(
                     Text(
                         text = state.error ?: "",
                         style = Typography.barlowSemiBold14,
-                        color = colorResource(R.color.error),
+                        color = MaterialTheme.colorScheme.error,
                     )
                 }
             }
@@ -216,7 +214,7 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = "Don't have an account?",
-                        color = colorResource(id = R.color.gray)
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     TextButton(onClick = onNavigateToRegister) {
                         Text("Sign Up")
