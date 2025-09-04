@@ -100,6 +100,16 @@ val Typography.barlowBody14: TextStyle
         )
     }
 
+val Typography.barlowSemiBold14: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 14.dp),
+            fontWeight = FontWeight.SemiBold
+        )
+    }
+
 val Typography.barlowBold14: TextStyle
     @Composable
     get() {

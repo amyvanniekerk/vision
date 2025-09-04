@@ -1,5 +1,6 @@
 package com.example.vision.presentation.screens.onboarding
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +18,6 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -48,6 +48,7 @@ import com.example.vision.ui.components.StandardInputField
 import com.example.vision.ui.modifiers.clearFocusOnTap
 import com.example.vision.ui.theme.barlowBody16
 import com.example.vision.ui.theme.barlowBold32
+import com.example.vision.ui.theme.barlowSemiBold14
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -115,8 +116,7 @@ fun LoginScreen(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
-                ),
-                modifier = Modifier.fillMaxWidth()
+                )
             )
 
             StandardInputField(
@@ -144,23 +144,24 @@ fun LoginScreen(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
-                ),
-                modifier = Modifier.fillMaxWidth()
+                )
             )
 
             if (state.error != null) {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer
-                    ),
-                    shape = RoundedCornerShape(24.dp)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(shape = RoundedCornerShape(100.dp))
+                        .background(color = MaterialTheme.colorScheme.errorContainer)
+                        .padding(4.dp)
+                        .padding(start = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
                 ) {
                     Text(
                         text = state.error ?: "",
+                        style = Typography.barlowSemiBold14,
                         color = colorResource(R.color.error),
-                        modifier = Modifier.padding(12.dp),
-                        textAlign = TextAlign.Center
                     )
                 }
             }
