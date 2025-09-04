@@ -17,12 +17,13 @@ object NavigationRoute {
     const val APPEARANCE = "appearance"
     const val CUSTOMER_LIST = "customer_list"
     const val CUSTOMER_DETAILS = "customer_details/{customerId}"
+    const val MANAGE_PROFILE = "manage_profile"
     const val EMPLOYEE_MANAGEMENT = "employee_management"
     const val CREATE_EMPLOYEE = "create_employee"
     const val SPLASH = "splash"
     const val JOURNEY = "journey"
     const val COLOR_MATCH = "color_match"
     const val CARE_GUIDE = "care_guide"
-    
+
     fun customerDetails(customerId: String) = "customer_details/$customerId"
 }

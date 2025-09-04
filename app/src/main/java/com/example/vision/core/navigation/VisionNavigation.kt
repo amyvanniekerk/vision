@@ -27,6 +27,7 @@ import com.example.vision.presentation.screens.home.AdminHomeScreen
 import com.example.vision.presentation.screens.home.HomeScreen
 import com.example.vision.presentation.screens.onboarding.LoginScreen
 import com.example.vision.presentation.screens.onboarding.RegisterScreen
+import com.example.vision.presentation.screens.profile.ManageProfile
 import com.example.vision.presentation.screens.profile.ProfileScreen
 import com.example.vision.presentation.screens.settings.AppearanceScreen
 import com.example.vision.presentation.screens.settings.SettingsScreen
@@ -279,6 +280,11 @@ fun VisionNavigation(
                 onNavigateBack = {
                     navController.popBackStack()
                 },
+                onNavigateToManage = {
+                    navController.navigate(NavigationRoute.MANAGE_PROFILE) {
+                        launchSingleTop = true
+                    }
+                },
                 onNavigateToAppearance = {
                     navController.navigate(NavigationRoute.APPEARANCE) {
                         launchSingleTop = true
@@ -297,6 +303,14 @@ fun VisionNavigation(
 
         composable(NavigationRoute.APPEARANCE) {
             AppearanceScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(NavigationRoute.MANAGE_PROFILE) {
+            ManageProfile(
                 onNavigateBack = {
                     navController.popBackStack()
                 }

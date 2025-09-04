@@ -5,7 +5,7 @@ import java.util.Date
 data class User(
     val id: String,
     val email: String,
-    val profile: UserProfile,
+    val profile: UserProfile?,
     val role: UserRole = UserRole.CUSTOMER,
     val employeeData: EmployeeData? = null,
     val createdAt: Date = Date(),

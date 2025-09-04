@@ -23,7 +23,7 @@ class CustomerRepository @Inject constructor() {
             _customers.value
         } else {
             _customers.value.filter { customer ->
-                customer.profile.displayName.contains(query, ignoreCase = true) ||
+                customer.profile?.displayName?.contains(query, ignoreCase = true) == true ||
                 customer.email.contains(query, ignoreCase = true) ||
                 customer.id.contains(query, ignoreCase = true)
             }

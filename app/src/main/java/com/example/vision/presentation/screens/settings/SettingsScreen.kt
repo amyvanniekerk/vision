@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.collectLatest
 fun SettingsScreen(
     onNavigateBack: () -> Unit,
     onNavigateToAppearance: () -> Unit,
+    onNavigateToManage: () -> Unit,
     onNavigateToLogin: () -> Unit = {},
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
@@ -63,7 +64,7 @@ fun SettingsScreen(
                     icon = Icons.Default.Person,
                     title = "Profile",
                     subtitle = "Manage your personal information",
-                    onClick = { /* Navigate to profile edit */ }
+                    onClick = onNavigateToManage
                 )
                 SettingsItem(
                     icon = Icons.Default.Lock,

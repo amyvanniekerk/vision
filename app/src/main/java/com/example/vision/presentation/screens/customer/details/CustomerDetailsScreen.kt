@@ -62,7 +62,7 @@ fun CustomerDetailsScreen(
             }
 
             // Eye Data Summary
-            customer.profile.eyeData.forEach { eyeData ->
+            customer.profile?.eyeData?.forEach { eyeData ->
                 item {
                     EyeDataCard(
                         eyeData = eyeData,

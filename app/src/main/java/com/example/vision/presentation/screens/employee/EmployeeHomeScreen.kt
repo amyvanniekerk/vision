@@ -380,12 +380,12 @@ private fun RecentCustomerItem(
             
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = customer.profile.displayName,
+                    text = customer.profile?.displayName ?:"Username",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium
                 )
                 Text(
-                    text = "${customer.profile.eyeData.size} eye record(s)",
+                    text = "${customer.profile?.eyeData?.size} eye record(s)",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -437,7 +437,7 @@ private fun QuickStatsCard(customers: List<User> = emptyList()) {
                 )
                 StatItem(
                     label = "Eye Records",
-                    value = customers.sumOf { it.profile.eyeData.size }.toString(),
+                    value = customers.sumOf { it.profile?.eyeData?.size ?: 0 }.toString(),
                     icon = Icons.Default.Visibility,
                     modifier = Modifier.weight(1f)
                 )

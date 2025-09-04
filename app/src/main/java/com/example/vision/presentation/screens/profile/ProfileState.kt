@@ -14,7 +14,7 @@ sealed class ProfileEvent {
     object LoadProfile : ProfileEvent()
     object StartEditing : ProfileEvent()
     object CancelEditing : ProfileEvent()
-    data class UpdateProfile(val profile: UserProfile) : ProfileEvent()
+    data class UpdateProfile(val profile: UserProfile?) : ProfileEvent()
     data class UpdateAvatar(val avatarUrl: String) : ProfileEvent()
     object ClearError : ProfileEvent()
 }

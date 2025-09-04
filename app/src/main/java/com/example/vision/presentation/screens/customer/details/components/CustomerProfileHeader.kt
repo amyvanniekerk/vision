@@ -67,7 +67,7 @@ fun CustomerProfileHeader(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = customer.profile.displayName,
+                    text = customer.profile?.displayName ?:"Username",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -82,7 +82,7 @@ fun CustomerProfileHeader(
                     fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
                 )
-                customer.profile.phoneNumber?.let { phone ->
+                customer.profile?.phoneNumber?.let { phone ->
                     Text(
                         text = phone,
                         fontSize = 14.sp,

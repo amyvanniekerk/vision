@@ -38,7 +38,7 @@ fun CustomerListScreen(
             customers
         } else {
             customers.filter { customer ->
-                customer.profile.displayName.contains(searchQuery, ignoreCase = true) ||
+                customer.profile?.displayName?.contains(searchQuery, ignoreCase = true) == true ||
                         customer.email.contains(searchQuery, ignoreCase = true) ||
                         customer.id.contains(searchQuery, ignoreCase = true)
             }
@@ -170,7 +170,7 @@ private fun CustomerListItem(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
-                    text = customer.profile.displayName,
+                    text = customer.profile?.displayName ?: "Username",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -193,18 +193,18 @@ private fun CustomerListItem(
             ) {
                 Surface(
                     shape = CircleShape,
-                    color = if (customer.profile.eyeData.isNotEmpty()) {
+                    color = if (customer.profile?.eyeData?.isNotEmpty() == true) {
                         MaterialTheme.colorScheme.secondary
                     } else {
                         MaterialTheme.colorScheme.surfaceVariant
                     }
                 ) {
                     Text(
-                        text = customer.profile.eyeData.size.toString(),
+                        text = customer.profile?.eyeData?.size.toString(),
                         modifier = Modifier.padding(8.dp),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (customer.profile.eyeData.isNotEmpty()) {
+                        color = if (customer.profile?.eyeData?.isNotEmpty() == true) {
                             MaterialTheme.colorScheme.onSecondary
                         } else {
                             MaterialTheme.colorScheme.onSurfaceVariant

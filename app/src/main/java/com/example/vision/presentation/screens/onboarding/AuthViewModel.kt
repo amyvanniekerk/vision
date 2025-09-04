@@ -66,7 +66,7 @@ class AuthViewModel @Inject constructor(
                     )
                 }
                 sendEffect(AuthEffect.NavigateToHome)
-                sendEffect(AuthEffect.ShowSuccess("Welcome back, ${user.profile.displayName}!"))
+                sendEffect(AuthEffect.ShowSuccess("Welcome back, ${user.profile?.displayName}!"))
             },
             onFailure = { error ->
                 updateState { 
@@ -104,7 +104,7 @@ class AuthViewModel @Inject constructor(
                     )
                 }
                 sendEffect(AuthEffect.NavigateToHome)
-                sendEffect(AuthEffect.ShowSuccess("Welcome, ${user.profile.displayName}!"))
+                sendEffect(AuthEffect.ShowSuccess("Welcome, ${user.profile?.displayName}!"))
             },
             onFailure = { error ->
                 updateState { 

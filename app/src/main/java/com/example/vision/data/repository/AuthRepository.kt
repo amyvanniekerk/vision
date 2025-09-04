@@ -81,7 +81,7 @@ class AuthRepository @Inject constructor() {
         return _currentUser.value
     }
     
-    suspend fun updateProfile(profile: UserProfile): Result<User> {
+    suspend fun updateProfile(profile: UserProfile?): Result<User> {
         return try {
             delay(1000)
             val currentUser = _currentUser.value ?: throw Exception("No user logged in")

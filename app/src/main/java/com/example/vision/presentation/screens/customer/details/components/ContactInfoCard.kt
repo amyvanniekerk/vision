@@ -55,7 +55,7 @@ fun ContactInfoCard(customer: User) {
                 )
             }
 
-            customer.profile.phoneNumber?.let { phone ->
+            customer.profile?.phoneNumber?.let { phone ->
                 InfoRow(
                     icon = Icons.Default.Phone,
                     label = "Phone",
@@ -69,7 +69,7 @@ fun ContactInfoCard(customer: User) {
                 value = customer.email
             )
 
-            customer.profile.location?.let { location ->
+            customer.profile?.location?.let { location ->
                 val locationText = listOfNotNull(
                     location.city,
                     location.state,
@@ -113,7 +113,7 @@ fun MedicalHistoryCard(customer: User) {
                 )
             }
 
-            customer.profile.dateOfBirth?.let { dob ->
+            customer.profile?.dateOfBirth?.let { dob ->
                 InfoRow(
                     icon = Icons.Default.Cake,
                     label = "Date of Birth",
@@ -121,7 +121,7 @@ fun MedicalHistoryCard(customer: User) {
                 )
             }
 
-            customer.profile.gender?.let { gender ->
+            customer.profile?.gender?.let { gender ->
                 InfoRow(
                     icon = Icons.Default.Person,
                     label = "Gender",
@@ -131,7 +131,7 @@ fun MedicalHistoryCard(customer: User) {
             }
 
             // Eye Data Count
-            if (customer.profile.eyeData.isNotEmpty()) {
+            if (customer.profile?.eyeData?.isNotEmpty() == true) {
                 InfoRow(
                     icon = Icons.Default.RemoveRedEye,
                     label = "Eye Records",

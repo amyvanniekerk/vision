@@ -3,9 +3,6 @@ package com.example.vision.presentation.screens.profile
 import com.example.vision.core.base.BaseViewModel
 import com.example.vision.data.model.UserProfile
 import com.example.vision.data.repository.AuthRepository
-import com.example.vision.presentation.screens.profile.ProfileEffect
-import com.example.vision.presentation.screens.profile.ProfileEvent
-import com.example.vision.presentation.screens.profile.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -53,7 +50,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
     
-    private suspend fun updateProfile(profile: UserProfile) {
+    private suspend fun updateProfile(profile: UserProfile?) {
         updateState { copy(isLoading = true) }
         
         authRepository.updateProfile(profile).fold(

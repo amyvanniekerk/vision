@@ -91,12 +91,13 @@ fun EmployeeManagementScreen(
                     )
                     StatColumn(
                         label = "Departments",
-                        value = employees.mapNotNull { it.employeeData?.department }.distinct().size.toString(),
+                        value = employees.mapNotNull { it.employeeData?.department }
+                            .distinct().size.toString(),
                         icon = Icons.Default.Business
                     )
                 }
             }
-            
+
             // Employee Count
             Text(
                 text = "${employees.size} employee(s)",
@@ -104,7 +105,7 @@ fun EmployeeManagementScreen(
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            
+
             // Employee List
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -117,7 +118,7 @@ fun EmployeeManagementScreen(
                         onEdit = { onEditEmployee(employee) }
                     )
                 }
-                
+
                 if (employees.isEmpty()) {
                     item {
                         EmptyEmployeeList(onCreateEmployee = onCreateEmployee)
@@ -191,14 +192,14 @@ private fun EmployeeListItem(
                     tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
-            
+
             // Employee Info
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
-                    text = employee.profile.displayName,
+                    text = employee.profile?.displayName ?: "Username",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -219,7 +220,7 @@ private fun EmployeeListItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
             }
-            
+
             // Status & Actions
             Column(
                 horizontalAlignment = Alignment.End,
@@ -227,9 +228,9 @@ private fun EmployeeListItem(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = if (employee.isActive) 
+                    color = if (employee.isActive)
                         MaterialTheme.colorScheme.secondaryContainer
-                    else 
+                    else
                         MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
                 ) {
                     Text(
@@ -237,13 +238,13 @@ private fun EmployeeListItem(
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Medium,
-                        color = if (employee.isActive) 
+                        color = if (employee.isActive)
                             MaterialTheme.colorScheme.onSecondaryContainer
-                        else 
+                        else
                             MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
-                
+
                 Icon(
                     Icons.Default.Edit,
                     contentDescription = null,
@@ -283,7 +284,7 @@ private fun EmptyEmployeeList(
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
         )
-        
+
         Button(
             onClick = onCreateEmployee,
             modifier = Modifier.padding(top = 8.dp)

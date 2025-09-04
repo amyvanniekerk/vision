@@ -38,12 +38,6 @@ fun ProfileScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val profile = state.profile
 
-    var firstName by remember(profile) { mutableStateOf(profile?.firstName ?: "") }
-    var lastName by remember(profile) { mutableStateOf(profile?.lastName ?: "") }
-    var bio by remember(profile) { mutableStateOf(profile?.bio ?: "") }
-    var phoneNumber by remember(profile) { mutableStateOf(profile?.phoneNumber ?: "") }
-    var city by remember(profile) { mutableStateOf(profile?.location?.city ?: "") }
-    var country by remember(profile) { mutableStateOf(profile?.location?.country ?: "") }
 
     Scaffold(
         topBar = {
@@ -90,218 +84,48 @@ fun ProfileScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            Icons.Default.Person,
+                            imageVector = Icons.Default.Person,
                             contentDescription = null,
                             modifier = Modifier.size(60.dp),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
 
-                    if (!state.isEditing) {
-                        Text(
-                            text = profile.displayName,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                    Text(
+                        text = profile.displayName,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
 
-                        if (!profile.bio.isNullOrEmpty()) {
-                            Card(
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceVariant
-                                )
-                            ) {
-                                Text(
-                                    text = profile.bio,
-                                    modifier = Modifier.padding(16.dp),
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
-
+                    if (!profile.bio.isNullOrEmpty()) {
                         Card(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(16.dp),
-                                verticalArrangement = Arrangement.spacedBy(12.dp)
-                            ) {
-                                ProfileInfoRow(
-                                    icon = Icons.Default.Person,
-                                    label = "Name",
-                                    value = "${profile.firstName} ${profile.lastName}"
-                                )
-
-                                if (!profile.phoneNumber.isNullOrEmpty()) {
-                                    ProfileInfoRow(
-                                        icon = Icons.Default.Phone,
-                                        label = "Phone",
-                                        value = profile.phoneNumber
-                                    )
-                                }
-
-                                if (profile.location != null) {
-                                    val locationText = listOfNotNull(
-                                        profile.location.city,
-                                        profile.location.country
-                                    ).joinToString(", ")
-
-                                    if (locationText.isNotEmpty()) {
-                                        ProfileInfoRow(
-                                            icon = Icons.Default.LocationOn,
-                                            label = "Location",
-                                            value = locationText
-                                        )
-                                    }
-                                }
-
-                                if (profile.gender != null) {
-                                    ProfileInfoRow(
-                                        icon = Icons.Default.Person,
-                                        label = "Gender",
-                                        value = profile.gender.name.lowercase().replaceFirstChar { it.uppercase() }.replace("_", " ")
-                                    )
-                                }
-                            }
-                        }
-                        
-                        // Settings Button
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onNavigateToSettings() },
+                            modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant
                             )
                         ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Icon(
-                                        Icons.Default.Settings,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
-                                    Column {
-                                        Text(
-                                            text = "Settings",
-                                            fontSize = 16.sp,
-                                            fontWeight = FontWeight.Medium,
-                                            color = MaterialTheme.colorScheme.onSecondaryContainer
-                                        )
-                                        Text(
-                                            text = "Appearance and preferences",
-                                            fontSize = 12.sp,
-                                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
-                                        )
-                                    }
-                                }
-                                Icon(
-                                    Icons.Default.ChevronRight,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-                    } else {
-                        OutlinedTextField(
-                            value = firstName,
-                            onValueChange = { firstName = it },
-                            label = { Text("First Name") },
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        OutlinedTextField(
-                            value = lastName,
-                            onValueChange = { lastName = it },
-                            label = { Text("Last Name") },
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        OutlinedTextField(
-                            value = bio,
-                            onValueChange = { bio = it },
-                            label = { Text("Bio") },
-                            minLines = 3,
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        OutlinedTextField(
-                            value = phoneNumber,
-                            onValueChange = { phoneNumber = it },
-                            label = { Text("Phone Number") },
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Phone,
-                                imeAction = ImeAction.Next
-                            ),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        OutlinedTextField(
-                            value = city,
-                            onValueChange = { city = it },
-                            label = { Text("City") },
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        OutlinedTextField(
-                            value = country,
-                            onValueChange = { country = it },
-                            label = { Text("Country") },
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            OutlinedButton(
-                                onClick = { viewModel.handleEvent(ProfileEvent.CancelEditing) },
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Text("Cancel")
-                            }
-
-                            Button(
-                                onClick = {
-                                    val updatedProfile = profile.copy(
-                                        firstName = firstName,
-                                        lastName = lastName,
-                                        displayName = "$firstName $lastName",
-                                        bio = bio.ifEmpty { null },
-                                        phoneNumber = phoneNumber.ifEmpty { null },
-                                        location = if (city.isNotEmpty() || country.isNotEmpty()) {
-                                            profile.location?.copy(
-                                                city = city.ifEmpty { null },
-                                                country = country.ifEmpty { null }
-                                            ) ?: Location(
-                                                city = city.ifEmpty { null },
-                                                country = country.ifEmpty { null }
-                                            )
-                                        } else null
-                                    )
-                                    viewModel.handleEvent(ProfileEvent.UpdateProfile(updatedProfile))
-                                },
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Text("Save")
-                            }
+                            Text(
+                                text = profile.bio,
+                                modifier = Modifier.padding(16.dp),
+                                textAlign = TextAlign.Center
+                            )
                         }
                     }
+
+                    // Settings Button
+                    NavigateToButton(
+                        title = "Settings",
+                        description = "Appearance and preferences",
+                        icon = Icons.Default.Settings,
+                        onNavigateToSettings = onNavigateToSettings
+                    )
+
+                    NavigateToButton(
+                        title = "Your information",
+                        description = "Documents and photos",
+                        icon = Icons.Default.Settings,
+                        onNavigateToSettings = onNavigateToSettings
+                    )
                 }
             }
 
@@ -322,31 +146,103 @@ fun ProfileScreen(
 }
 
 @Composable
-private fun ProfileInfoRow(
+private fun NavigateToButton(
+    title: String,
+    description: String,
+    icon: ImageVector? = null,
+    onNavigateToSettings: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onNavigateToSettings() },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                if (icon != null) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+
+                Column {
+                    Text(
+                        text = title,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                    Text(
+                        text = description,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                    )
+                }
+            }
+
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+    }
+}
+
+@Composable
+internal fun ProfileInfoRow(
     icon: ImageVector,
     label: String,
     value: String
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Icon(
-            icon,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
         )
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = label,
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
             )
-            Text(
-                text = value,
-                fontSize = 16.sp
-            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = label,
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = value,
+                    fontSize = 16.sp
+                )
+            }
         }
     }
 }
