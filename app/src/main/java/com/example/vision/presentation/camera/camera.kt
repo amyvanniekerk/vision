@@ -12,6 +12,7 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Cameraswitch
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -61,7 +62,7 @@ fun CameraScreen(
             launcher.launch(Manifest.permission.CAMERA)
         }
     }
-    
+
     if (hasCameraPermission) {
         CameraPreview(
             onImageCaptured = onImageCaptured,
@@ -90,6 +91,7 @@ fun CameraPreview(
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
     var imageCapture by remember { mutableStateOf<ImageCapture?>(null) }
     var capturedImageUri by remember { mutableStateOf<Uri?>(null) }
+    var isUsingFrontCamera by remember { mutableStateOf(false) }
 
     DisposableEffect(Unit) {
         onDispose {
@@ -113,59 +115,92 @@ fun CameraPreview(
                 tint = Color.White
             )
         }
-        
-        AndroidView(
-            factory = { ctx ->
-                val previewView = PreviewView(ctx)
 
-                val cameraProvider = cameraProviderFuture.get()
+        // Key the AndroidView to force recreation when camera changes
+        key(isUsingFrontCamera) {
+            AndroidView(
+                factory = { ctx ->
+                    val previewView = PreviewView(ctx)
 
-                val preview = Preview.Builder().build().also {
-                    it.setSurfaceProvider(previewView.surfaceProvider)
-                }
+                    val cameraProvider = cameraProviderFuture.get()
 
-                imageCapture = ImageCapture.Builder().build()
+                    val preview = Preview.Builder().build().also {
+                        it.setSurfaceProvider(previewView.surfaceProvider)
+                    }
 
-                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                    imageCapture = ImageCapture.Builder().build()
 
-                try {
-                    cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
-                        lifecycleOwner,
-                        cameraSelector,
-                        preview,
-                        imageCapture
-                    )
-                } catch (exc: Exception) {
-                    // Handle camera binding error
-                }
+                    val cameraSelector = if (isUsingFrontCamera) {
+                        CameraSelector.DEFAULT_FRONT_CAMERA
+                    } else {
+                        CameraSelector.DEFAULT_BACK_CAMERA
+                    }
 
-                previewView
-            },
-            modifier = Modifier.fillMaxSize()
-        )
+                    try {
+                        cameraProvider.unbindAll()
+                        cameraProvider.bindToLifecycle(
+                            lifecycleOwner,
+                            cameraSelector,
+                            preview,
+                            imageCapture
+                        )
+                    } catch (exc: Exception) {
+                        // Handle camera binding error
+                    }
 
-        // capture button
-        FloatingActionButton(
-            onClick = {
-                captureImage(context, imageCapture, cameraExecutor) { uri ->
-                    capturedImageUri = uri
-                    onImageCaptured(uri)
-                    // Don't call onBack() here - let the navigation handle it
-                }
-            },
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(16.dp)
-                .size(70.dp),
-            containerColor = Color.White,
-            contentColor = Color.Black
-        ) {
-            Icon(
-                imageVector = Icons.Default.PhotoCamera,
-                contentDescription = "Take Picture",
-                modifier = Modifier.size(32.dp)
+                    previewView
+                },
+                modifier = Modifier.fillMaxSize()
             )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(alignment = Alignment.BottomCenter)
+                .navigationBarsPadding()
+                .padding(bottom = 32.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // flip camera button
+            FloatingActionButton(
+                onClick = {
+                    isUsingFrontCamera = !isUsingFrontCamera
+                },
+                modifier = Modifier.size(56.dp),
+                containerColor = Color.White.copy(alpha = 0.8f),
+                contentColor = Color.Black
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Cameraswitch,
+                    contentDescription = "Flip Camera",
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+
+            // capture button
+            FloatingActionButton(
+                onClick = {
+                    captureImage(context, imageCapture, cameraExecutor) { uri ->
+                        capturedImageUri = uri
+                        onImageCaptured(uri)
+                        // Don't call onBack() here - let the navigation handle it
+                    }
+                },
+                modifier = Modifier.size(80.dp),
+                containerColor = Color.White,
+                contentColor = Color.Black
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PhotoCamera,
+                    contentDescription = "Take Picture",
+                    modifier = Modifier.size(36.dp)
+                )
+            }
+            
+            // Spacer to balance the layout
+            Spacer(modifier = Modifier.size(56.dp))
         }
 
 
