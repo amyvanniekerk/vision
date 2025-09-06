@@ -24,6 +24,7 @@ object NavigationRoute {
     const val JOURNEY = "journey"
     const val COLOR_MATCH = "color_match"
     const val CARE_GUIDE = "care_guide"
+    const val CAMERA = "camera"
 
     fun customerDetails(customerId: String) = "customer_details/$customerId"
 }

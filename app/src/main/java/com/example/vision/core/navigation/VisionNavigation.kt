@@ -32,6 +32,7 @@ import com.example.vision.presentation.screens.profile.ProfileScreen
 import com.example.vision.presentation.screens.settings.AppearanceScreen
 import com.example.vision.presentation.screens.settings.SettingsScreen
 import com.example.vision.presentation.screens.splash.SplashScreen
+import com.example.vision.presentation.camera.CameraScreen
 
 @Composable
 fun VisionNavigation(
@@ -325,17 +326,38 @@ fun VisionNavigation(
             )
         }
 
-        composable(NavigationRoute.COLOR_MATCH) {
+        composable(NavigationRoute.COLOR_MATCH) { backStackEntry ->
+            val capturedImageUri = backStackEntry.savedStateHandle.get<String>("captured_image_uri")
+            
             ColorMatchScreen(
                 onNavigateBack = {
                     navController.popBackStack()
-                }
+                },
+                onNavigateToCamera = {
+                    navController.navigate(NavigationRoute.CAMERA) {
+                        launchSingleTop = true
+                    }
+                },
+                capturedImageUri = capturedImageUri
             )
         }
 
         composable(NavigationRoute.CARE_GUIDE) {
             CareGuideScreen(
                 onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(NavigationRoute.CAMERA) {
+            CameraScreen(
+                onImageCaptured = { uri ->
+                    // Pass the URI back to ColorMatchScreen
+                    navController.previousBackStackEntry?.savedStateHandle?.set("captured_image_uri", uri.toString())
+                    navController.popBackStack()
+                },
+                onBack = {
                     navController.popBackStack()
                 }
             )

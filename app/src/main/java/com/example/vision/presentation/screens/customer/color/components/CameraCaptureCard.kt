@@ -36,11 +36,14 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 
 @Composable
 fun CameraCaptureCard(
     isAnalyzing: Boolean,
+    currentPhotoUri: String? = null,
     onCapture: () -> Unit
 ) {
     Card(
@@ -70,50 +73,67 @@ fun CameraCaptureCard(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                if (isAnalyzing) {
-                    val infiniteTransition = rememberInfiniteTransition()
-                    val rotation by infiniteTransition.animateFloat(
-                        initialValue = 0f,
-                        targetValue = 360f,
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(2000, easing = LinearEasing)
+                when {
+                    isAnalyzing -> {
+                        // Analyzing state
+                        val infiniteTransition = rememberInfiniteTransition()
+                        val rotation by infiniteTransition.animateFloat(
+                            initialValue = 0f,
+                            targetValue = 360f,
+                            animationSpec = infiniteRepeatable(
+                                animation = tween(2000, easing = LinearEasing)
+                            )
                         )
-                    )
 
-                    Icon(
-                        Icons.Default.CameraAlt,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(64.dp)
-                            .rotate(rotation),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-
-                    Text(
-                        "Analyzing colors...",
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(bottom = 16.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Medium
-                    )
-                } else {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
                         Icon(
-                            Icons.Default.PhotoCamera,
+                            Icons.Default.CameraAlt,
                             contentDescription = null,
-                            modifier = Modifier.size(64.dp),
+                            modifier = Modifier
+                                .size(64.dp)
+                                .rotate(rotation),
                             tint = MaterialTheme.colorScheme.primary
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
+
                         Text(
-                            "Position natural eye in good lighting",
-                            textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            "Analyzing colors...",
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = 16.dp),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Medium
                         )
+                    }
+                    currentPhotoUri != null -> {
+                        // Photo captured state - display the image
+                        AsyncImage(
+                            model = currentPhotoUri,
+                            contentDescription = "Captured eye photo",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                    else -> {
+                        // No photo state
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                Icons.Default.PhotoCamera,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                "Position natural eye in good lighting",
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
                     }
                 }
             }
@@ -132,10 +152,10 @@ fun CameraCaptureCard(
 
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = if (isAnalyzing) {
-                        "Analyzing..."
-                    } else {
-                        "Capture & Analyze"
+                    text = when {
+                        isAnalyzing -> "Analyzing..."
+                        currentPhotoUri != null -> "Retake Photo"
+                        else -> "Capture & Analyze"
                     }
                 )
             }
