@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vision.ui.theme.ThemeType
+import com.example.vision.ui.theme.barlowBody16
 
 data class ThemeDetails(
     val name: String,
@@ -91,9 +92,9 @@ fun getThemeDetails(theme: ThemeType): ThemeDetails {
             description = "Rose tints to reduce glare",
             icon = Icons.Default.RemoveRedEye,
             colors = listOf(
-                Color(0xFFFFF0F5),
-                Color(0xFFFFE4E1),
-                Color(0xFFD3D3D3)
+                Color(0xFFFDEFF2), // very soft pink (background)
+                Color(0xFFEFDDE2), // muted rose tint (cards/surfaces)
+                Color(0xFF444444)  // dark gray for text (high contrast, not pure black)
             )
         )
     }
@@ -113,10 +114,11 @@ fun ThemeOptionItem(
             .clip(MaterialTheme.shapes.medium)
             .clickable { onSelect() },
         colors = CardDefaults.cardColors(
-            containerColor = if (isSelected)
+            containerColor = if (isSelected) {
                 MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
-            else
+            } else {
                 MaterialTheme.colorScheme.surface
+            }
         )
     ) {
         Row(
@@ -145,7 +147,7 @@ fun ThemeOptionItem(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = themeDetails.name,
-                        fontSize = 16.sp,
+                        style = Typography.barlowBody16,
                         fontWeight = if (isSelected) {
                             FontWeight.SemiBold
                         } else {

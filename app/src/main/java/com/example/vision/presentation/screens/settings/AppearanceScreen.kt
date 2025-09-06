@@ -64,7 +64,7 @@ fun AppearanceScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold
                     )
-                    
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -74,15 +74,15 @@ fun AppearanceScreen(
                             modifier = Modifier
                                 .weight(1f)
                                 .clip(MaterialTheme.shapes.medium)
-                                .clickable { 
+                                .clickable {
                                     if (state.isDarkMode) {
                                         viewModel.handleEvent(SettingsEvent.ToggleDarkMode(false))
                                     }
                                 },
                             colors = CardDefaults.cardColors(
-                                containerColor = if (!state.isDarkMode) 
+                                containerColor = if (!state.isDarkMode)
                                     MaterialTheme.colorScheme.primaryContainer
-                                else 
+                                else
                                     MaterialTheme.colorScheme.surfaceVariant
                             )
                         ) {
@@ -116,21 +116,21 @@ fun AppearanceScreen(
                                 }
                             }
                         }
-                        
+
                         // Dark Mode Card
                         Card(
                             modifier = Modifier
                                 .weight(1f)
                                 .clip(MaterialTheme.shapes.medium)
-                                .clickable { 
+                                .clickable {
                                     if (!state.isDarkMode) {
                                         viewModel.handleEvent(SettingsEvent.ToggleDarkMode(true))
                                     }
                                 },
                             colors = CardDefaults.cardColors(
-                                containerColor = if (state.isDarkMode) 
+                                containerColor = if (state.isDarkMode)
                                     MaterialTheme.colorScheme.primaryContainer
-                                else 
+                                else
                                     MaterialTheme.colorScheme.surfaceVariant
                             )
                         ) {
@@ -169,41 +169,41 @@ fun AppearanceScreen(
             }
 
 
-                Card(
-                    modifier = Modifier.fillMaxWidth()
+            Card(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
+                    Text(
+                        text = "Color Theme",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Text(
+                        text = "Choose a theme optimized for sensitive eyes",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
                     Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text(
-                            text = "Color Theme",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        
-                        Text(
-                            text = "Choose a theme optimized for sensitive eyes",
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            ThemeType.values().forEach { theme ->
-                                ThemeOptionItem(
-                                    theme = theme,
-                                    isSelected = state.themeType == theme,
-                                    onSelect = {
-                                        viewModel.handleEvent(SettingsEvent.ChangeThemeType(theme))
-                                    }
-                                )
-                            }
+                        ThemeType.values().forEach { theme ->
+                            ThemeOptionItem(
+                                theme = theme,
+                                isSelected = state.themeType == theme,
+                                onSelect = {
+                                    viewModel.handleEvent(SettingsEvent.ChangeThemeType(theme))
+                                }
+                            )
                         }
                     }
                 }
+            }
 
             // Eye Care Tips Card
             Card(
@@ -223,7 +223,7 @@ fun AppearanceScreen(
                         Icon(
                             Icons.Default.Lightbulb,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.size(24.dp)
                         )
                         Text(
@@ -232,7 +232,7 @@ fun AppearanceScreen(
                             fontWeight = FontWeight.Medium
                         )
                     }
-                    
+
                     Column(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
@@ -248,7 +248,6 @@ fun AppearanceScreen(
 }
 
 
-
 @Composable
 private fun EyeCareTip(text: String) {
     Row(
@@ -260,7 +259,7 @@ private fun EyeCareTip(text: String) {
                 .padding(top = 6.dp)
                 .size(6.dp)
                 .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.secondary)
         )
         Text(
             text = text,

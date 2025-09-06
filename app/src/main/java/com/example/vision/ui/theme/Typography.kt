@@ -91,6 +91,35 @@ val Typography.openSansBold32: TextStyle
 
 // barlow fonts
 
+val Typography.barlowBody10: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 10.dp)
+        )
+    }
+
+val Typography.barlowBody12: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 12.dp)
+        )
+    }
+
+
+val Typography.barlowBold12: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 12.dp),
+            fontWeight = FontWeight.Bold
+        )
+    }
+
 val Typography.barlowBody14: TextStyle
     @Composable
     get() {
@@ -129,6 +158,16 @@ val Typography.barlowBody16: TextStyle
         )
     }
 
+val Typography.barlowSemiBold16: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 16.dp),
+            fontWeight = FontWeight.SemiBold
+        )
+    }
+
 val Typography.barlowBody18: TextStyle
     @Composable
     get() {
@@ -138,12 +177,32 @@ val Typography.barlowBody18: TextStyle
         )
     }
 
+val Typography.barlowBold18: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 18.dp),
+            fontWeight = FontWeight.Bold
+        )
+    }
+
 val Typography.barlowBody20: TextStyle
     @Composable
     get() {
         return TextStyle(
             fontFamily = barlowFont,
             fontSize = dpToSp(dp = 20.dp)
+        )
+    }
+
+val Typography.barlowBold20: TextStyle
+    @Composable
+    get() {
+        return TextStyle(
+            fontFamily = barlowFont,
+            fontSize = dpToSp(dp = 20.dp),
+            fontWeight = FontWeight.Bold
         )
     }
 

@@ -23,7 +23,7 @@ import com.example.vision.presentation.screens.customer.journey.JourneyScreen
 import com.example.vision.presentation.screens.employee.CreateEmployeeScreen
 import com.example.vision.presentation.screens.employee.EmployeeHomeScreen
 import com.example.vision.presentation.screens.employee.EmployeeManagementScreen
-import com.example.vision.presentation.screens.home.AdminHomeScreen
+import com.example.vision.presentation.screens.admin.AdminHomeScreen
 import com.example.vision.presentation.screens.home.HomeScreen
 import com.example.vision.presentation.screens.onboarding.LoginScreen
 import com.example.vision.presentation.screens.onboarding.RegisterScreen
